@@ -2,9 +2,10 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {}
+index = {"URL": "00_core.ipynb",
+         "CMUDict": "00_core.ipynb"}
 
-modules = []
+modules = ["nlp/datasets/cmudict.py"]
 
 doc_url = "https://pmaxit.github.io/mllib/"
 

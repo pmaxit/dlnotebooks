@@ -10,7 +10,7 @@ entries:
       title: Overview
       url: /
     - output: web,pdf
-      title: module name here
+      title: NLP deep learning
       url: core.html
     output: web
     title: mllib
