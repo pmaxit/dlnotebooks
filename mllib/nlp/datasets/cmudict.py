@@ -93,13 +93,13 @@ _PUNCTUATIONS = set([
     "}RIGHT-BRACE",
 ])
 
-_alt_re = re.compile(r'^[a-zA-Z]+')
+_alt_re = re.compile(r'[^a-zA-Z]+')
 
 class CMUDict(datasets.GeneratorBasedBuilder):
     """ CMU Dict dataset """
 
     BUILDER_CONFIGS=[
-        datasets.BuilderConfig(name='cmu1',description='cmu phonemes to words', version='1.0.0')
+        datasets.BuilderConfig(name='cmu2',description='cmu phonemes to words', version='1.0.0')
     ]
 
     def _info(self):
