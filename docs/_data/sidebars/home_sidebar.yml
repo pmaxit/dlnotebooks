@@ -11,7 +11,10 @@ entries:
       url: /
     - output: web,pdf
       title: NLP deep learning
-      url: core.html
+      url: dataset.html
+    - output: web,pdf
+      title: Encoder - Decoder Architecture
+      url: seq2seq.html
     output: web
     title: mllib
   output: web

@@ -73,6 +73,8 @@ nb_path: "nbs/index.ipynb"
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">mllib.nlp.datasets.cmudict</span> <span class="kn">import</span> <span class="n">CMUDict</span>
+<span class="kn">from</span> <span class="nn">datasets</span> <span class="kn">import</span> <span class="n">load_dataset</span>
+<span class="kn">from</span> <span class="nn">mllib.nlp.seq2seq</span> <span class="kn">import</span> <span class="n">Seq2Seq</span>
 </pre></div>
 
     </div>
@@ -89,10 +91,7 @@ nb_path: "nbs/index.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ds</span> <span class="o">=</span> <span class="n">CMUDict</span><span class="p">()</span>
-<span class="n">config</span> <span class="o">=</span> <span class="n">DownloadConfig</span><span class="p">(</span><span class="n">cache_dir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">()),</span> <span class="s1">&#39;.mozhi&#39;</span><span class="p">))</span>
-
-<span class="n">ds</span><span class="o">.</span><span class="n">download_and_prepare</span><span class="p">(</span><span class="n">download_config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ds</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="s1">&#39;/notebooks/dlnotebooks/mllib/nlp/datasets/cmudict.py&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -104,17 +103,9 @@ nb_path: "nbs/index.ipynb"
 
 <div class="output_area">
 
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>Using custom data configuration cmu2
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Downloading and preparing dataset cmu_dict/cmu2 to /root/.cache/huggingface/datasets/cmu_dict/cmu2/1.0.0...
-Dataset cmu_dict downloaded and prepared to /root/.cache/huggingface/datasets/cmu_dict/cmu2/1.0.0. Subsequent calls will reuse this data.
+<pre>Downloading and preparing dataset cmu_dict/cmu2 to /root/.cache/huggingface/datasets/cmu_dict/cmu2/1.0.0/3b3904aac9acadebed008a26558832f94749da39e2cd1ecee825720fd34a1da1...
+Dataset cmu_dict downloaded and prepared to /root/.cache/huggingface/datasets/cmu_dict/cmu2/1.0.0/3b3904aac9acadebed008a26558832f94749da39e2cd1ecee825720fd34a1da1. Subsequent calls will reuse this data.
 </pre>
 </div>
 </div>
@@ -132,7 +123,7 @@ Dataset cmu_dict downloaded and prepared to /root/.cache/huggingface/datasets/cm
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train_test</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">as_dataset</span><span class="p">(</span><span class="n">split</span><span class="o">=</span><span class="s1">&#39;train&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">train_test_split</span><span class="p">(</span><span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train_test</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">train_test_split</span><span class="p">(</span><span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -164,35 +155,13 @@ Dataset cmu_dict downloaded and prepared to /root/.cache/huggingface/datasets/cm
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>{&#39;words&#39;: &#39;multiplying&#39;,
- &#39;phoneme&#39;: [&#39;M&#39;, &#39;AH1&#39;, &#39;L&#39;, &#39;T&#39;, &#39;AH0&#39;, &#39;P&#39;, &#39;L&#39;, &#39;AY2&#39;, &#39;IH0&#39;, &#39;NG&#39;]}</pre>
+<pre>{&#39;word&#39;: &#39;preempted&#39;,
+ &#39;word_length&#39;: 9,
+ &#39;phoneme&#39;: [&#39;P&#39;, &#39;R&#39;, &#39;IY0&#39;, &#39;EH1&#39;, &#39;M&#39;, &#39;P&#39;, &#39;T&#39;, &#39;IH0&#39;, &#39;D&#39;]}</pre>
 </div>
 
 </div>
 
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># trainvalid_test = ds.as_dataset(split=&#39;train&#39;).train_test_split(test_size=0.2)</span>
-<span class="c1"># train_test = trainvalid_test[&#39;train&#39;].train_test_split(test_size=0.1)</span>
-
-<span class="c1"># datasets = DatasetDict({</span>
-<span class="c1">#     &quot;train&quot;: train_test[&quot;train&quot;],</span>
-<span class="c1">#     &quot;valid&quot;: train_test[&quot;test&quot;],</span>
-<span class="c1">#     &quot;test&quot;: trainvalid_test[&quot;test&quot;]})</span>
-</pre></div>
-
-    </div>
 </div>
 </div>
 
@@ -232,25 +201,7 @@ Dataset cmu_dict downloaded and prepared to /root/.cache/huggingface/datasets/cm
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_tokens</span><span class="p">(</span><span class="n">word_list</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">word_list</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">get_tokens</span><span class="p">(</span><span class="n">train_test</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">][</span><span class="s1">&#39;words&#39;</span><span class="p">])))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train_test</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">][</span><span class="s1">&#39;word&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">train_test</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">][</span><span class="s1">&#39;phoneme&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> 
 </pre></div>
 
     </div>
@@ -265,7 +216,7 @@ Dataset cmu_dict downloaded and prepared to /root/.cache/huggingface/datasets/cm
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>[&#39;m&#39;, &#39;u&#39;, &#39;l&#39;, &#39;t&#39;, &#39;i&#39;, &#39;p&#39;, &#39;l&#39;, &#39;y&#39;, &#39;i&#39;, &#39;n&#39;, &#39;g&#39;]</pre>
+<pre>(&#39;preempted&#39;, [&#39;P&#39;, &#39;R&#39;, &#39;IY0&#39;, &#39;EH1&#39;, &#39;M&#39;, &#39;P&#39;, &#39;T&#39;, &#39;IH0&#39;, &#39;D&#39;])</pre>
 </div>
 
 </div>
@@ -283,14 +234,29 @@ Dataset cmu_dict downloaded and prepared to /root/.cache/huggingface/datasets/cm
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">phoneme_vocab</span> <span class="o">=</span> <span class="n">build_vocab_from_iterator</span><span class="p">(</span><span class="n">train_test</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">][</span><span class="s1">&#39;phoneme&#39;</span><span class="p">],</span> <span class="n">specials</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;&lt;unk&gt;&quot;</span><span class="p">])</span>
-<span class="n">word_vocab</span> <span class="o">=</span> <span class="n">build_vocab_from_iterator</span><span class="p">(</span><span class="n">train_test</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">][</span><span class="s1">&#39;words&#39;</span><span class="p">],</span> <span class="n">specials</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;&lt;unk&gt;&quot;</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">phoneme_vocab</span> <span class="o">=</span> <span class="n">build_vocab_from_iterator</span><span class="p">(</span><span class="n">train_test</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">][</span><span class="s1">&#39;phoneme&#39;</span><span class="p">])</span>
+<span class="n">word_vocab</span> <span class="o">=</span> <span class="n">build_vocab_from_iterator</span><span class="p">(</span><span class="n">train_test</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">][</span><span class="s1">&#39;word&#39;</span><span class="p">])</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>108124lines [00:00, 531019.42lines/s]
+108124lines [00:00, 547361.56lines/s]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
     {% endraw %}
 
@@ -301,7 +267,7 @@ Dataset cmu_dict downloaded and prepared to /root/.cache/huggingface/datasets/cm
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">word_vocab</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">word_vocab</span><span class="o">.</span><span class="n">lookup_indices</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">])</span>
 </pre></div>
 
     </div>
@@ -316,9 +282,271 @@ Dataset cmu_dict downloaded and prepared to /root/.cache/huggingface/datasets/cm
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>[2, 17, 10]</pre>
+<pre>[3, 18, 11]</pre>
 </div>
 
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Data-Collator">Data Collator<a class="anchor-link" href="#Data-Collator"> </a></h1>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">BATCH_SIZE</span> <span class="o">=</span> <span class="mi">32</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">process_single_example</span><span class="p">(</span><span class="n">word_tokens</span><span class="p">,</span> <span class="n">phoneme</span><span class="p">,</span> <span class="n">word_length</span><span class="p">):</span>
+    <span class="c1"># Heree you can add variety of operations, Not only is it tokenize</span>
+    <span class="c1"># The object that this function handles, Namely dataset this data type, adopt featuer</span>
+    
+    <span class="n">src</span> <span class="o">=</span> <span class="n">word_vocab</span><span class="o">.</span><span class="n">lookup_indices</span><span class="p">(</span><span class="n">word_tokens</span><span class="p">)</span>
+    <span class="n">trg</span> <span class="o">=</span> <span class="n">phoneme_vocab</span><span class="o">.</span><span class="n">lookup_indices</span><span class="p">(</span><span class="n">phoneme</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">src</span><span class="p">,</span> <span class="n">trg</span><span class="p">,</span> <span class="n">word_length</span>
+
+<span class="k">def</span> <span class="nf">collate_batch</span><span class="p">(</span><span class="n">batch</span><span class="p">):</span>
+    
+    <span class="n">batch_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">batch</span><span class="p">[</span><span class="s1">&#39;word&#39;</span><span class="p">])</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="p">[</span><span class="n">process_single_example</span><span class="p">(</span><span class="o">*</span><span class="n">tokens</span><span class="p">)</span> <span class="k">for</span> <span class="n">tokens</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">batch</span><span class="p">[</span><span class="s1">&#39;word&#39;</span><span class="p">],</span> <span class="n">batch</span><span class="p">[</span><span class="s1">&#39;phoneme&#39;</span><span class="p">],</span> <span class="n">batch</span><span class="p">[</span><span class="s1">&#39;word_length&#39;</span><span class="p">])]</span>
+    
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;src&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">out</span><span class="p">],</span>
+        <span class="s1">&#39;trg&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">out</span><span class="p">],</span>
+        <span class="s1">&#39;src_len&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">b</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">out</span><span class="p">],</span>
+    <span class="p">}</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ds_processed</span> <span class="o">=</span> <span class="n">train_test</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">collate_batch</span><span class="p">,</span> <span class="n">remove_columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;word&#39;</span><span class="p">,</span><span class="s1">&#39;word_length&#39;</span><span class="p">,</span><span class="s1">&#39;phoneme&#39;</span><span class="p">],</span> 
+                        <span class="n">batch_size</span><span class="o">=</span> <span class="n">BATCH_SIZE</span><span class="p">,</span>
+                           <span class="n">batched</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">with_format</span><span class="p">(</span><span class="s1">&#39;pytorch&#39;</span><span class="p">,</span> <span class="n">output_all_columns</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ds_processed</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{&#39;src&#39;: tensor([18,  8,  9,  9,  5,  7, 16]),
+ &#39;trg&#39;: tensor([15, 19,  6, 10, 25]),
+ &#39;src_len&#39;: tensor(7)}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">pad_collate</span><span class="p">(</span><span class="n">batch</span><span class="p">):</span>
+    
+    <span class="k">def</span> <span class="nf">pad</span><span class="p">(</span><span class="n">xs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">rnn</span><span class="o">.</span><span class="n">pad_sequence</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">batch_first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+    <span class="n">src</span> <span class="o">=</span> <span class="p">[</span><span class="n">b</span><span class="p">[</span><span class="s1">&#39;src&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">batch</span><span class="p">]</span>
+    <span class="n">trg</span> <span class="o">=</span> <span class="p">[</span><span class="n">b</span><span class="p">[</span><span class="s1">&#39;trg&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">batch</span><span class="p">]</span>
+    <span class="n">src_len</span> <span class="o">=</span> <span class="p">[</span><span class="n">b</span><span class="p">[</span><span class="s1">&#39;src_len&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">batch</span><span class="p">]</span>
+    
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;src&#39;</span><span class="p">:</span> <span class="n">pad</span><span class="p">(</span><span class="n">src</span><span class="p">),</span> 
+        <span class="s1">&#39;trg&#39;</span> <span class="p">:</span> <span class="n">pad</span><span class="p">(</span><span class="n">trg</span><span class="p">),</span> 
+        <span class="s1">&#39;src_len&#39;</span> <span class="p">:</span> <span class="n">src_len</span>
+    <span class="p">}</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dls</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">ds_processed</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">],</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">collate_fn</span><span class="o">=</span><span class="n">pad_collate</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">DataCollatorWithPadding</span><span class="p">,</span> <span class="n">default_data_collator</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="c1"># checking</span>
+<span class="k">def</span> <span class="nf">decode_word</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">word_vocab</span><span class="o">.</span><span class="n">itos</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">decode_phoneme</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">phoneme_vocab</span><span class="o">.</span><span class="n">itos</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">])</span>
+
+<span class="n">indices</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">1000</span><span class="p">),</span> <span class="mi">5</span> <span class="p">)</span>
+
+<span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">:</span>
+    <span class="n">src</span> <span class="o">=</span> <span class="n">decode_word</span><span class="p">(</span><span class="n">ds_processed</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">][</span><span class="s1">&#39;src&#39;</span><span class="p">][</span><span class="n">l</span><span class="p">])</span>
+    <span class="n">trg</span> <span class="o">=</span> <span class="n">decode_phoneme</span><span class="p">(</span><span class="n">ds_processed</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">][</span><span class="s1">&#39;trg&#39;</span><span class="p">][</span><span class="n">l</span><span class="p">])</span>
+    <span class="n">src_len</span> <span class="o">=</span> <span class="n">ds_processed</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">][</span><span class="s1">&#39;src_len&#39;</span><span class="p">][</span><span class="n">l</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">trg</span><span class="p">,</span> <span class="n">src_len</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>rids R,IH1,D,Z tensor(4)
+dershem D,ER1,SH,IH0,M tensor(7)
+botello B,OW0,T,EH1,L,OW0 tensor(7)
+brimmed B,R,IH1,M,D tensor(7)
+blinds B,L,AY1,N,D,Z tensor(6)
+</pre>
+</div>
 </div>
 
 </div>
@@ -333,6 +561,75 @@ Dataset cmu_dict downloaded and prepared to /root/.cache/huggingface/datasets/cm
 </div>
 </div>
 </div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pytorch_lightning</span> <span class="k">as</span> <span class="nn">pl</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pytorch_lightning.callbacks</span> <span class="kn">import</span> <span class="n">LearningRateMonitor</span>
+<span class="kn">from</span> <span class="nn">pytorch_lightning.loggers</span> <span class="kn">import</span> <span class="n">TensorBoardLogger</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">lr_monitor</span> <span class="o">=</span> <span class="n">LearningRateMonitor</span><span class="p">(</span><span class="n">logging_interval</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">TensorBoardLogger</span><span class="p">(</span><span class="s1">&#39;tb_logs&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;my_model&#39;</span><span class="p">)</span>
+<span class="n">trainer</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">Trainer</span><span class="p">(</span><span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">lr_monitor</span><span class="p">],</span><span class="n">max_epochs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">gpus</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">logger</span><span class="o">=</span><span class="p">[</span><span class="n">logger</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>GPU available: True, used: True
+TPU available: None, using: 0 TPU cores
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
 </div>
  
 
