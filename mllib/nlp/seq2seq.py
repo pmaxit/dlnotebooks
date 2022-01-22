@@ -4,10 +4,14 @@ __all__ = ['Encoder', 'Decoder', 'Seq2Seq']
 
 # Cell
 from torch import nn
+from torch import optim
+import torch
+
+from torch.nn.utils.rnn import pack_padded_sequence, pad_packed_sequence
 
 # Cell
 class Encoder(nn.Module):
-    def __init__(self, input_size, embedding_size, hidden_size, num_layers, p):
+    def __init__(self, input_size, embedding_size, hidden_size, num_layers=2, p=0.1):
         super(Encoder, self).__init__()
         self.hidden_size = hidden_size
         self.num_layers = num_layers
@@ -21,8 +25,8 @@ class Encoder(nn.Module):
         embedding = self.dropout(self.embedding(x))
         # embedding shape : (seq_length, N, embedding_size)
 
-        x_packed = pack_padded_sequence(embedding, src_len, batch_first=True, enforce_sorted=False)
-        output_packed, (hidden,cell) = self.rnn(x_packed, batch_first=True)
+        x_packed = pack_padded_sequence(embedding, x_len, batch_first=False, enforce_sorted=False)
+        output_packed, (hidden,cell) = self.rnn(x_packed)
 
         # irrelevant because we are interested only in hidden state
         #output_padded, output_lengths = pad_packed_sequence(output_packed, batch_first=True)
@@ -38,9 +42,9 @@ class Decoder(nn.Module):
         self.hidden_size = hidden_size
         self.num_layers = num_layers
 
-        self.dropout = nn.Dropout(p)
+        self.dropout = nn.Dropout(dropout)
         self.embedding = nn.Embedding(input_size, embedding_size)
-        self.rnn = nn.LSTM(embedding_size, hidden_size, num_layers, dropout=p)
+        self.rnn = nn.LSTM(embedding_size, hidden_size, num_layers, dropout=dropout)
 
         self.fc = nn.Linear(hidden_size, output_size)
 
@@ -53,7 +57,7 @@ class Decoder(nn.Module):
 
         output = self.rnn(embedding, (hidden,cell))
 
-        predictions = self.fc(outputs)
+        predictions = self.fc(output)
         # shape of predictions : (1, N, length_of_vocab)
 
         predictions = predictions.squeeze(0)
@@ -71,7 +75,7 @@ import pytorch_lightning.metrics.functional as plfunc
 from pytorch_lightning.loggers import TensorBoardLogger
 
 # Cell
-class Seq2Seq(nn.Module):
+class Seq2Seq(pl.LightningModule):
     """ Encoder decoder pytorch lightning module for training seq2seq model with teacher forcing
     Module try to learn mapping from one sequence to another
     """
@@ -113,7 +117,8 @@ class Seq2Seq(nn.Module):
         self.num_layers = 2
 
         self.save_hyperparameters()
-        self.max_epochs=kwargs['max_epochs']
+
+        self.max_epochs= kwargs.get('max_epochs',1)
 
         self.learning_rate = 0.0005
 
@@ -123,6 +128,7 @@ class Seq2Seq(nn.Module):
             self.input_dim,
             self.enc_emb_dim,
             self.enc_hid_dim,
+            self.num_layers,
             self.enc_dropout
         )
 
@@ -211,15 +217,10 @@ class Seq2Seq(nn.Module):
         return [optimizer],[lr_scheduler]
 
     def training_step(self, batch, batch_idx):
-        src_batch, trg_batch = batch
-
-        src_seq  = src_batch['src_ids']
-        # change from [batch, seq_len] to [seq_len, batch]
-
+        import pdb
+        pdb.set_trace()
+        src_seq, trg_seq, src_lengths = batch['src'],batch['trg'], batch['src_len']
         src_seq = src_seq.transpose(0, 1)
-        src_lengths = src_batcb['src_lengths']
-
-        trg_seq = trg_batch['trg_ids']
         trg_seq = trg_seq.transpose(0, 1)
 
         output = self.forward(src_seq, src_lengths, trg_seq)
@@ -243,16 +244,7 @@ class Seq2Seq(nn.Module):
 
     def validation_step(self, batch,batch_idx):
         """ validation is in eval model so we do not have to use placeholder input sensors"""
-        src_batch, trg_batch = batch
-
-        src_seq = src_batch['src_ids']
-        src_seq = src_seq.transpose(0, 1)
-
-        src_lengths = src_batch['src_lengths']
-
-        trg_seq = trg_batch['trg_ids']
-        trg_seq = trg_seq.transpose(0, 1)
-        trg_lengths = trg_batch['trg_lengths']
+        src_seq, trg_seq, src_lengths = batch['src'],batch['trg'], batch['src_len']
 
         outputs = self.forward(src_seq, src_lengths, trg_seq, 0)
 

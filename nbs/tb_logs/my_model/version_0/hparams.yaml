@@ -1,0 +1,7 @@
+dropout: 0.1
+emb_dim: 8
+hidden_dim: 32
+input_vocab_size: 28
+output_vocab_size: 85
+p: 0.1
+padding_index: 0

@@ -99,7 +99,7 @@ class CMUDict(datasets.GeneratorBasedBuilder):
     """ CMU Dict dataset """
 
     BUILDER_CONFIGS=[
-        datasets.BuilderConfig(name='cmu2',description='cmu phonemes to words', version='1.0.0')
+        datasets.BuilderConfig(name='cmu3',description='cmu phonemes to words', version='1.0.0')
     ]
 
     def _info(self):
@@ -107,7 +107,8 @@ class CMUDict(datasets.GeneratorBasedBuilder):
             description = _DESCRIPTION,
             features = datasets.Features(
                 {
-                    'words': datasets.Value("string"),
+                    'word': datasets.Value("string"),
+                    'word_length': datasets.Value('uint8'),
                     'phoneme': datasets.Sequence(datasets.Value("string"))
                 }
             ),
@@ -156,6 +157,7 @@ class CMUDict(datasets.GeneratorBasedBuilder):
                     # regular expression _alt_re removes (1) and change DATAPOINTS(1) to DATAPOINTS
                     word = re.sub(_alt_re, '', word)
                     yield _id, {
-                        'words': word,
+                        'word': word,
+                        'word_length': len(word),
                         'phoneme': phones
                     }

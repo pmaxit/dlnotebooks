@@ -103,9 +103,8 @@ nb_path: "nbs/index.ipynb"
 
 <div class="output_area">
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Downloading and preparing dataset cmu_dict/cmu2 to /root/.cache/huggingface/datasets/cmu_dict/cmu2/1.0.0/3b3904aac9acadebed008a26558832f94749da39e2cd1ecee825720fd34a1da1...
-Dataset cmu_dict downloaded and prepared to /root/.cache/huggingface/datasets/cmu_dict/cmu2/1.0.0/3b3904aac9acadebed008a26558832f94749da39e2cd1ecee825720fd34a1da1. Subsequent calls will reuse this data.
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Reusing dataset cmu_dict (/root/.cache/huggingface/datasets/cmu_dict/cmu3/1.0.0/a0e598136ef9603a0d6d97059f5e1d2cac789cfe3c0998cb2b4b7fd4198da504)
 </pre>
 </div>
 </div>
@@ -127,6 +126,20 @@ Dataset cmu_dict downloaded and prepared to /root/.cache/huggingface/datasets/cm
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Loading cached split indices for dataset at /root/.cache/huggingface/datasets/cmu_dict/cmu3/1.0.0/a0e598136ef9603a0d6d97059f5e1d2cac789cfe3c0998cb2b4b7fd4198da504/cache-b2d95f15faaf4500.arrow and /root/.cache/huggingface/datasets/cmu_dict/cmu3/1.0.0/a0e598136ef9603a0d6d97059f5e1d2cac789cfe3c0998cb2b4b7fd4198da504/cache-5ed2c4bc219f1934.arrow
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -248,8 +261,8 @@ Dataset cmu_dict downloaded and prepared to /root/.cache/huggingface/datasets/cm
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>108124lines [00:00, 531019.42lines/s]
-108124lines [00:00, 547361.56lines/s]
+<pre>108124lines [00:00, 533153.22lines/s]
+108124lines [00:00, 556501.02lines/s]
 </pre>
 </div>
 </div>
@@ -306,7 +319,7 @@ Dataset cmu_dict downloaded and prepared to /root/.cache/huggingface/datasets/cm
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">BATCH_SIZE</span> <span class="o">=</span> <span class="mi">32</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">BATCH_SIZE</span> <span class="o">=</span> <span class="mi">8</span>
 </pre></div>
 
     </div>
@@ -367,6 +380,21 @@ Dataset cmu_dict downloaded and prepared to /root/.cache/huggingface/datasets/cm
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Loading cached processed dataset at /root/.cache/huggingface/datasets/cmu_dict/cmu3/1.0.0/a0e598136ef9603a0d6d97059f5e1d2cac789cfe3c0998cb2b4b7fd4198da504/cache-9251eda5a2ed1528.arrow
+Loading cached processed dataset at /root/.cache/huggingface/datasets/cmu_dict/cmu3/1.0.0/a0e598136ef9603a0d6d97059f5e1d2cac789cfe3c0998cb2b4b7fd4198da504/cache-2af5bbd04ed3259a.arrow
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -540,11 +568,11 @@ Dataset cmu_dict downloaded and prepared to /root/.cache/huggingface/datasets/cm
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>rids R,IH1,D,Z tensor(4)
-dershem D,ER1,SH,IH0,M tensor(7)
-botello B,OW0,T,EH1,L,OW0 tensor(7)
-brimmed B,R,IH1,M,D tensor(7)
-blinds B,L,AY1,N,D,Z tensor(6)
+<pre>spano S,P,AA1,N,OW0 tensor(5)
+crampton K,R,AE1,M,P,T,AH0,N tensor(8)
+dimples D,IH1,M,P,AH0,L,Z tensor(7)
+modality M,AH0,D,AE1,L,AH0,T,IY0 tensor(8)
+receptionists R,IY0,S,EH1,P,SH,AH0,N,IH0,S,T,S tensor(13)
 </pre>
 </div>
 </div>
@@ -620,6 +648,594 @@ blinds B,L,AY1,N,D,Z tensor(6)
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>GPU available: True, used: True
 TPU available: None, using: 0 TPU cores
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">input_vocab_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">word_vocab</span><span class="p">)</span>
+<span class="n">output_vocab_size</span>  <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">phoneme_vocab</span><span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">Seq2Seq</span><span class="p">(</span><span class="n">input_vocab_size</span><span class="p">,</span> <span class="n">output_vocab_size</span><span class="p">,</span><span class="n">p</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">batch</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">dls</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">train_dataloader</span><span class="o">=</span><span class="n">dls</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>
+  | Name    | Type             | Params
+---------------------------------------------
+0 | _loss   | CrossEntropyLoss | 0     
+1 | encoder | Encoder          | 14.0 K
+2 | decoder | Decoder          | 17.3 K
+---------------------------------------------
+31.4 K    Trainable params
+0         Non-trainable params
+31.4 K    Total params
+0.125     Total estimated model params size (MB)
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&gt; <span class="ansi-green-fg">/notebooks/dlnotebooks/mllib/nlp/seq2seq.py</span>(222)<span class="ansi-cyan-fg">training_step</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">    220 </span><span class="ansi-red-fg">        </span><span class="ansi-green-fg">import</span> pdb
+<span class="ansi-green-fg">    221 </span><span class="ansi-red-fg">        </span>pdb<span class="ansi-blue-fg">.</span>set_trace<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">--&gt; 222 </span><span class="ansi-red-fg">        </span>src_seq<span class="ansi-blue-fg">,</span> trg_seq<span class="ansi-blue-fg">,</span> src_lengths <span class="ansi-blue-fg">=</span> batch<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;src&#39;</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span>batch<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;trg&#39;</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span> batch<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;src_len&#39;</span><span class="ansi-blue-fg">]</span>
+<span class="ansi-green-fg">    223 </span><span class="ansi-red-fg">        </span>src_seq <span class="ansi-blue-fg">=</span> src_seq<span class="ansi-blue-fg">.</span>transpose<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">    224 </span><span class="ansi-red-fg">        </span>trg_seq <span class="ansi-blue-fg">=</span> trg_seq<span class="ansi-blue-fg">.</span>transpose<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">)</span>
+
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&gt; <span class="ansi-green-fg">/notebooks/dlnotebooks/mllib/nlp/seq2seq.py</span>(223)<span class="ansi-cyan-fg">training_step</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">    221 </span><span class="ansi-red-fg">        </span>pdb<span class="ansi-blue-fg">.</span>set_trace<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">    222 </span><span class="ansi-red-fg">        </span>src_seq<span class="ansi-blue-fg">,</span> trg_seq<span class="ansi-blue-fg">,</span> src_lengths <span class="ansi-blue-fg">=</span> batch<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;src&#39;</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span>batch<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;trg&#39;</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span> batch<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;src_len&#39;</span><span class="ansi-blue-fg">]</span>
+<span class="ansi-green-fg">--&gt; 223 </span><span class="ansi-red-fg">        </span>src_seq <span class="ansi-blue-fg">=</span> src_seq<span class="ansi-blue-fg">.</span>transpose<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">    224 </span><span class="ansi-red-fg">        </span>trg_seq <span class="ansi-blue-fg">=</span> trg_seq<span class="ansi-blue-fg">.</span>transpose<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">    225 </span>
+
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&gt; <span class="ansi-green-fg">/notebooks/dlnotebooks/mllib/nlp/seq2seq.py</span>(224)<span class="ansi-cyan-fg">training_step</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">    222 </span><span class="ansi-red-fg">        </span>src_seq<span class="ansi-blue-fg">,</span> trg_seq<span class="ansi-blue-fg">,</span> src_lengths <span class="ansi-blue-fg">=</span> batch<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;src&#39;</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span>batch<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;trg&#39;</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span> batch<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;src_len&#39;</span><span class="ansi-blue-fg">]</span>
+<span class="ansi-green-fg">    223 </span><span class="ansi-red-fg">        </span>src_seq <span class="ansi-blue-fg">=</span> src_seq<span class="ansi-blue-fg">.</span>transpose<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">--&gt; 224 </span><span class="ansi-red-fg">        </span>trg_seq <span class="ansi-blue-fg">=</span> trg_seq<span class="ansi-blue-fg">.</span>transpose<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">    225 </span>
+<span class="ansi-green-fg">    226 </span><span class="ansi-red-fg">        </span>output <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>forward<span class="ansi-blue-fg">(</span>src_seq<span class="ansi-blue-fg">,</span> src_lengths<span class="ansi-blue-fg">,</span> trg_seq<span class="ansi-blue-fg">)</span>
+
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&gt; <span class="ansi-green-fg">/notebooks/dlnotebooks/mllib/nlp/seq2seq.py</span>(226)<span class="ansi-cyan-fg">training_step</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">    224 </span><span class="ansi-red-fg">        </span>trg_seq <span class="ansi-blue-fg">=</span> trg_seq<span class="ansi-blue-fg">.</span>transpose<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">    225 </span>
+<span class="ansi-green-fg">--&gt; 226 </span><span class="ansi-red-fg">        </span>output <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>forward<span class="ansi-blue-fg">(</span>src_seq<span class="ansi-blue-fg">,</span> src_lengths<span class="ansi-blue-fg">,</span> trg_seq<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">    227 </span>
+<span class="ansi-green-fg">    228 </span><span class="ansi-red-fg">        </span><span class="ansi-red-fg"># do not know if this is a problem, loss will be computed with sos token</span>
+
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Breakpoint 9 at /notebooks/dlnotebooks/mllib/nlp/seq2seq.py:160
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&gt; <span class="ansi-green-fg">/notebooks/dlnotebooks/mllib/nlp/seq2seq.py</span>(167)<span class="ansi-cyan-fg">forward</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">    165 </span>
+<span class="ansi-green-fg">    166 </span>
+<span class="ansi-green-fg">--&gt; 167 </span><span class="ansi-red-fg">        </span>batch_size <span class="ansi-blue-fg">=</span> source<span class="ansi-blue-fg">.</span>shape<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">]</span>
+<span class="ansi-green-fg">    168 </span><span class="ansi-red-fg">        </span>target_len <span class="ansi-blue-fg">=</span> target<span class="ansi-blue-fg">.</span>shape<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span>
+<span class="ansi-green-fg">    169 </span>
+
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&gt; <span class="ansi-green-fg">/notebooks/dlnotebooks/mllib/nlp/seq2seq.py</span>(168)<span class="ansi-cyan-fg">forward</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">    166 </span>
+<span class="ansi-green-fg">    167 </span><span class="ansi-red-fg">        </span>batch_size <span class="ansi-blue-fg">=</span> source<span class="ansi-blue-fg">.</span>shape<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">]</span>
+<span class="ansi-green-fg">--&gt; 168 </span><span class="ansi-red-fg">        </span>target_len <span class="ansi-blue-fg">=</span> target<span class="ansi-blue-fg">.</span>shape<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span>
+<span class="ansi-green-fg">    169 </span>
+<span class="ansi-green-fg">    170 </span><span class="ansi-red-fg">        </span>target_vocab_size <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>output_dim
+
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&gt; <span class="ansi-green-fg">/notebooks/dlnotebooks/mllib/nlp/seq2seq.py</span>(170)<span class="ansi-cyan-fg">forward</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">    168 </span><span class="ansi-red-fg">        </span>target_len <span class="ansi-blue-fg">=</span> target<span class="ansi-blue-fg">.</span>shape<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span>
+<span class="ansi-green-fg">    169 </span>
+<span class="ansi-green-fg">--&gt; 170 </span><span class="ansi-red-fg">        </span>target_vocab_size <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>output_dim
+<span class="ansi-green-fg">    171 </span>
+<span class="ansi-green-fg">    172 </span><span class="ansi-red-fg">        </span>outputs <span class="ansi-blue-fg">=</span> torch<span class="ansi-blue-fg">.</span>zeros<span class="ansi-blue-fg">(</span>target_len<span class="ansi-blue-fg">,</span> batch_size<span class="ansi-blue-fg">,</span> target_vocab_size<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>to<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>device<span class="ansi-blue-fg">)</span>
+
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&gt; <span class="ansi-green-fg">/notebooks/dlnotebooks/mllib/nlp/seq2seq.py</span>(172)<span class="ansi-cyan-fg">forward</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">    170 </span><span class="ansi-red-fg">        </span>target_vocab_size <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>output_dim
+<span class="ansi-green-fg">    171 </span>
+<span class="ansi-green-fg">--&gt; 172 </span><span class="ansi-red-fg">        </span>outputs <span class="ansi-blue-fg">=</span> torch<span class="ansi-blue-fg">.</span>zeros<span class="ansi-blue-fg">(</span>target_len<span class="ansi-blue-fg">,</span> batch_size<span class="ansi-blue-fg">,</span> target_vocab_size<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>to<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>device<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">    173 </span>
+<span class="ansi-green-fg">    174 </span>
+
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&gt; <span class="ansi-green-fg">/notebooks/dlnotebooks/mllib/nlp/seq2seq.py</span>(176)<span class="ansi-cyan-fg">forward</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">    174 </span>
+<span class="ansi-green-fg">    175 </span>
+<span class="ansi-green-fg">--&gt; 176 </span><span class="ansi-red-fg">        </span>hidden<span class="ansi-blue-fg">,</span> cell <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>encoder<span class="ansi-blue-fg">(</span>source<span class="ansi-blue-fg">,</span> source_len<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">    177 </span>
+<span class="ansi-green-fg">    178 </span><span class="ansi-red-fg">        </span><span class="ansi-red-fg"># mask = [batch_size, src len]</span>
+
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&gt; <span class="ansi-green-fg">/notebooks/dlnotebooks/mllib/nlp/seq2seq.py</span>(181)<span class="ansi-cyan-fg">forward</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">    179 </span><span class="ansi-red-fg">        </span><span class="ansi-red-fg"># without sos token at the beginning and eos token at the end</span>
+<span class="ansi-green-fg">    180 </span>
+<span class="ansi-green-fg">--&gt; 181 </span><span class="ansi-red-fg">        </span>x <span class="ansi-blue-fg">=</span> target<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">:</span><span class="ansi-blue-fg">]</span>
+<span class="ansi-green-fg">    182 </span>
+<span class="ansi-green-fg">    183 </span><span class="ansi-red-fg">        </span><span class="ansi-green-fg">for</span> t <span class="ansi-green-fg">in</span> range<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">,</span> target_len<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&gt; <span class="ansi-green-fg">/notebooks/dlnotebooks/mllib/nlp/seq2seq.py</span>(183)<span class="ansi-cyan-fg">forward</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">    181 </span><span class="ansi-red-fg">        </span>x <span class="ansi-blue-fg">=</span> target<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">:</span><span class="ansi-blue-fg">]</span>
+<span class="ansi-green-fg">    182 </span>
+<span class="ansi-green-fg">--&gt; 183 </span><span class="ansi-red-fg">        </span><span class="ansi-green-fg">for</span> t <span class="ansi-green-fg">in</span> range<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">,</span> target_len<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">    184 </span><span class="ansi-red-fg">            </span>output<span class="ansi-blue-fg">,</span> hidden<span class="ansi-blue-fg">,</span> cell <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>decoder<span class="ansi-blue-fg">(</span>x<span class="ansi-blue-fg">,</span> hidden<span class="ansi-blue-fg">,</span> cell<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">    185 </span>
+
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&gt; <span class="ansi-green-fg">/notebooks/dlnotebooks/mllib/nlp/seq2seq.py</span>(184)<span class="ansi-cyan-fg">forward</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">    182 </span>
+<span class="ansi-green-fg">    183 </span><span class="ansi-red-fg">        </span><span class="ansi-green-fg">for</span> t <span class="ansi-green-fg">in</span> range<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">,</span> target_len<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 184 </span><span class="ansi-red-fg">            </span>output<span class="ansi-blue-fg">,</span> hidden<span class="ansi-blue-fg">,</span> cell <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>decoder<span class="ansi-blue-fg">(</span>x<span class="ansi-blue-fg">,</span> hidden<span class="ansi-blue-fg">,</span> cell<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">    185 </span>
+<span class="ansi-green-fg">    186 </span><span class="ansi-red-fg">            </span>outputs<span class="ansi-blue-fg">[</span>t<span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> output
+
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>TypeError: linear(): argument &#39;input&#39; (position 1) must be Tensor, not tuple
+&gt; <span class="ansi-green-fg">/notebooks/dlnotebooks/mllib/nlp/seq2seq.py</span>(184)<span class="ansi-cyan-fg">forward</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">    182 </span>
+<span class="ansi-green-fg">    183 </span><span class="ansi-red-fg">        </span><span class="ansi-green-fg">for</span> t <span class="ansi-green-fg">in</span> range<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">,</span> target_len<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 184 </span><span class="ansi-red-fg">            </span>output<span class="ansi-blue-fg">,</span> hidden<span class="ansi-blue-fg">,</span> cell <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>decoder<span class="ansi-blue-fg">(</span>x<span class="ansi-blue-fg">,</span> hidden<span class="ansi-blue-fg">,</span> cell<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">    185 </span>
+<span class="ansi-green-fg">    186 </span><span class="ansi-red-fg">            </span>outputs<span class="ansi-blue-fg">[</span>t<span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> output
+
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">BdbQuit</span>                                   Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-55-9697e6b32906&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>trainer<span class="ansi-blue-fg">.</span>fit<span class="ansi-blue-fg">(</span>model<span class="ansi-blue-fg">,</span> train_dataloader<span class="ansi-blue-fg">=</span>dls<span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/pytorch_lightning/trainer/trainer.py</span> in <span class="ansi-cyan-fg">fit</span><span class="ansi-blue-fg">(self, model, train_dataloader, val_dataloaders, datamodule)</span>
+<span class="ansi-green-intense-fg ansi-bold">    496</span> 
+<span class="ansi-green-intense-fg ansi-bold">    497</span>         <span class="ansi-red-fg"># dispath `start_training` or `start_testing` or `start_predicting`</span>
+<span class="ansi-green-fg">--&gt; 498</span><span class="ansi-red-fg">         </span>self<span class="ansi-blue-fg">.</span>dispatch<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    499</span> 
+<span class="ansi-green-intense-fg ansi-bold">    500</span>         <span class="ansi-red-fg"># plugin will finalized fitting (e.g. ddp_spawn will load trained model)</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/pytorch_lightning/trainer/trainer.py</span> in <span class="ansi-cyan-fg">dispatch</span><span class="ansi-blue-fg">(self)</span>
+<span class="ansi-green-intense-fg ansi-bold">    543</span> 
+<span class="ansi-green-intense-fg ansi-bold">    544</span>         <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 545</span><span class="ansi-red-fg">             </span>self<span class="ansi-blue-fg">.</span>accelerator<span class="ansi-blue-fg">.</span>start_training<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    546</span> 
+<span class="ansi-green-intense-fg ansi-bold">    547</span>     <span class="ansi-green-fg">def</span> train_or_test_or_predict<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/pytorch_lightning/accelerators/accelerator.py</span> in <span class="ansi-cyan-fg">start_training</span><span class="ansi-blue-fg">(self, trainer)</span>
+<span class="ansi-green-intense-fg ansi-bold">     71</span> 
+<span class="ansi-green-intense-fg ansi-bold">     72</span>     <span class="ansi-green-fg">def</span> start_training<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> trainer<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">---&gt; 73</span><span class="ansi-red-fg">         </span>self<span class="ansi-blue-fg">.</span>training_type_plugin<span class="ansi-blue-fg">.</span>start_training<span class="ansi-blue-fg">(</span>trainer<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     74</span> 
+<span class="ansi-green-intense-fg ansi-bold">     75</span>     <span class="ansi-green-fg">def</span> start_testing<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> trainer<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/pytorch_lightning/plugins/training_type/training_type_plugin.py</span> in <span class="ansi-cyan-fg">start_training</span><span class="ansi-blue-fg">(self, trainer)</span>
+<span class="ansi-green-intense-fg ansi-bold">    112</span>     <span class="ansi-green-fg">def</span> start_training<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> trainer<span class="ansi-blue-fg">:</span> <span class="ansi-blue-fg">&#39;Trainer&#39;</span><span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">-&gt;</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    113</span>         <span class="ansi-red-fg"># double dispatch to initiate the training loop</span>
+<span class="ansi-green-fg">--&gt; 114</span><span class="ansi-red-fg">         </span>self<span class="ansi-blue-fg">.</span>_results <span class="ansi-blue-fg">=</span> trainer<span class="ansi-blue-fg">.</span>run_train<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    115</span> 
+<span class="ansi-green-intense-fg ansi-bold">    116</span>     <span class="ansi-green-fg">def</span> start_testing<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> trainer<span class="ansi-blue-fg">:</span> <span class="ansi-blue-fg">&#39;Trainer&#39;</span><span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">-&gt;</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/pytorch_lightning/trainer/trainer.py</span> in <span class="ansi-cyan-fg">run_train</span><span class="ansi-blue-fg">(self)</span>
+<span class="ansi-green-intense-fg ansi-bold">    634</span>                 <span class="ansi-green-fg">with</span> self<span class="ansi-blue-fg">.</span>profiler<span class="ansi-blue-fg">.</span>profile<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;run_training_epoch&#34;</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    635</span>                     <span class="ansi-red-fg"># run train epoch</span>
+<span class="ansi-green-fg">--&gt; 636</span><span class="ansi-red-fg">                     </span>self<span class="ansi-blue-fg">.</span>train_loop<span class="ansi-blue-fg">.</span>run_training_epoch<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    637</span> 
+<span class="ansi-green-intense-fg ansi-bold">    638</span>                 <span class="ansi-green-fg">if</span> self<span class="ansi-blue-fg">.</span>max_steps <span class="ansi-green-fg">and</span> self<span class="ansi-blue-fg">.</span>max_steps <span class="ansi-blue-fg">&lt;=</span> self<span class="ansi-blue-fg">.</span>global_step<span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/pytorch_lightning/trainer/training_loop.py</span> in <span class="ansi-cyan-fg">run_training_epoch</span><span class="ansi-blue-fg">(self)</span>
+<span class="ansi-green-intense-fg ansi-bold">    491</span>             <span class="ansi-red-fg"># ------------------------------------</span>
+<span class="ansi-green-intense-fg ansi-bold">    492</span>             <span class="ansi-green-fg">with</span> self<span class="ansi-blue-fg">.</span>trainer<span class="ansi-blue-fg">.</span>profiler<span class="ansi-blue-fg">.</span>profile<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;run_training_batch&#34;</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 493</span><span class="ansi-red-fg">                 </span>batch_output <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>run_training_batch<span class="ansi-blue-fg">(</span>batch<span class="ansi-blue-fg">,</span> batch_idx<span class="ansi-blue-fg">,</span> dataloader_idx<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    494</span> 
+<span class="ansi-green-intense-fg ansi-bold">    495</span>             <span class="ansi-red-fg"># when returning -1 from train_step, we end epoch early</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/pytorch_lightning/trainer/training_loop.py</span> in <span class="ansi-cyan-fg">run_training_batch</span><span class="ansi-blue-fg">(self, batch, batch_idx, dataloader_idx)</span>
+<span class="ansi-green-intense-fg ansi-bold">    653</span> 
+<span class="ansi-green-intense-fg ansi-bold">    654</span>                         <span class="ansi-red-fg"># optimizer step</span>
+<span class="ansi-green-fg">--&gt; 655</span><span class="ansi-red-fg">                         </span>self<span class="ansi-blue-fg">.</span>optimizer_step<span class="ansi-blue-fg">(</span>optimizer<span class="ansi-blue-fg">,</span> opt_idx<span class="ansi-blue-fg">,</span> batch_idx<span class="ansi-blue-fg">,</span> train_step_and_backward_closure<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    656</span> 
+<span class="ansi-green-intense-fg ansi-bold">    657</span>                     <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/pytorch_lightning/trainer/training_loop.py</span> in <span class="ansi-cyan-fg">optimizer_step</span><span class="ansi-blue-fg">(self, optimizer, opt_idx, batch_idx, train_step_and_backward_closure)</span>
+<span class="ansi-green-intense-fg ansi-bold">    424</span> 
+<span class="ansi-green-intense-fg ansi-bold">    425</span>         <span class="ansi-red-fg"># model hook</span>
+<span class="ansi-green-fg">--&gt; 426</span><span class="ansi-red-fg">         model_ref.optimizer_step(
+</span><span class="ansi-green-intense-fg ansi-bold">    427</span>             self<span class="ansi-blue-fg">.</span>trainer<span class="ansi-blue-fg">.</span>current_epoch<span class="ansi-blue-fg">,</span>
+<span class="ansi-green-intense-fg ansi-bold">    428</span>             batch_idx<span class="ansi-blue-fg">,</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/pytorch_lightning/core/lightning.py</span> in <span class="ansi-cyan-fg">optimizer_step</span><span class="ansi-blue-fg">(self, epoch, batch_idx, optimizer, optimizer_idx, optimizer_closure, on_tpu, using_native_amp, using_lbfgs)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1383</span>             <span class="ansi-red-fg"># wraps into LightingOptimizer only for running step</span>
+<span class="ansi-green-intense-fg ansi-bold">   1384</span>             optimizer <span class="ansi-blue-fg">=</span> LightningOptimizer<span class="ansi-blue-fg">.</span>_to_lightning_optimizer<span class="ansi-blue-fg">(</span>optimizer<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>trainer<span class="ansi-blue-fg">,</span> optimizer_idx<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">-&gt; 1385</span><span class="ansi-red-fg">         </span>optimizer<span class="ansi-blue-fg">.</span>step<span class="ansi-blue-fg">(</span>closure<span class="ansi-blue-fg">=</span>optimizer_closure<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1386</span> 
+<span class="ansi-green-intense-fg ansi-bold">   1387</span>     <span class="ansi-green-fg">def</span> optimizer_zero_grad<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> epoch<span class="ansi-blue-fg">:</span> int<span class="ansi-blue-fg">,</span> batch_idx<span class="ansi-blue-fg">:</span> int<span class="ansi-blue-fg">,</span> optimizer<span class="ansi-blue-fg">:</span> Optimizer<span class="ansi-blue-fg">,</span> optimizer_idx<span class="ansi-blue-fg">:</span> int<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/pytorch_lightning/core/optimizer.py</span> in <span class="ansi-cyan-fg">step</span><span class="ansi-blue-fg">(self, closure, *args, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">    212</span>             profiler_name <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">f&#34;optimizer_step_and_closure_{self._optimizer_idx}&#34;</span>
+<span class="ansi-green-intense-fg ansi-bold">    213</span> 
+<span class="ansi-green-fg">--&gt; 214</span><span class="ansi-red-fg">         </span>self<span class="ansi-blue-fg">.</span>__optimizer_step<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">,</span> closure<span class="ansi-blue-fg">=</span>closure<span class="ansi-blue-fg">,</span> profiler_name<span class="ansi-blue-fg">=</span>profiler_name<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    215</span>         self<span class="ansi-blue-fg">.</span>_total_optimizer_step_calls <span class="ansi-blue-fg">+=</span> <span class="ansi-cyan-fg">1</span>
+<span class="ansi-green-intense-fg ansi-bold">    216</span> 
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/pytorch_lightning/core/optimizer.py</span> in <span class="ansi-cyan-fg">__optimizer_step</span><span class="ansi-blue-fg">(self, closure, profiler_name, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">    132</span> 
+<span class="ansi-green-intense-fg ansi-bold">    133</span>         <span class="ansi-green-fg">with</span> trainer<span class="ansi-blue-fg">.</span>profiler<span class="ansi-blue-fg">.</span>profile<span class="ansi-blue-fg">(</span>profiler_name<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 134</span><span class="ansi-red-fg">             </span>trainer<span class="ansi-blue-fg">.</span>accelerator<span class="ansi-blue-fg">.</span>optimizer_step<span class="ansi-blue-fg">(</span>optimizer<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>_optimizer_idx<span class="ansi-blue-fg">,</span> lambda_closure<span class="ansi-blue-fg">=</span>closure<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    135</span> 
+<span class="ansi-green-intense-fg ansi-bold">    136</span>     <span class="ansi-green-fg">def</span> step<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">,</span> closure<span class="ansi-blue-fg">:</span> Optional<span class="ansi-blue-fg">[</span>Callable<span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/pytorch_lightning/accelerators/accelerator.py</span> in <span class="ansi-cyan-fg">optimizer_step</span><span class="ansi-blue-fg">(self, optimizer, opt_idx, lambda_closure, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">    275</span>         )
+<span class="ansi-green-intense-fg ansi-bold">    276</span>         <span class="ansi-green-fg">if</span> make_optimizer_step<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 277</span><span class="ansi-red-fg">             </span>self<span class="ansi-blue-fg">.</span>run_optimizer_step<span class="ansi-blue-fg">(</span>optimizer<span class="ansi-blue-fg">,</span> opt_idx<span class="ansi-blue-fg">,</span> lambda_closure<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    278</span>         self<span class="ansi-blue-fg">.</span>precision_plugin<span class="ansi-blue-fg">.</span>post_optimizer_step<span class="ansi-blue-fg">(</span>optimizer<span class="ansi-blue-fg">,</span> opt_idx<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    279</span>         self<span class="ansi-blue-fg">.</span>training_type_plugin<span class="ansi-blue-fg">.</span>post_optimizer_step<span class="ansi-blue-fg">(</span>optimizer<span class="ansi-blue-fg">,</span> opt_idx<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/pytorch_lightning/accelerators/accelerator.py</span> in <span class="ansi-cyan-fg">run_optimizer_step</span><span class="ansi-blue-fg">(self, optimizer, optimizer_idx, lambda_closure, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">    280</span> 
+<span class="ansi-green-intense-fg ansi-bold">    281</span>     <span class="ansi-green-fg">def</span> run_optimizer_step<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> optimizer<span class="ansi-blue-fg">:</span> Optimizer<span class="ansi-blue-fg">,</span> optimizer_idx<span class="ansi-blue-fg">:</span> int<span class="ansi-blue-fg">,</span> lambda_closure<span class="ansi-blue-fg">:</span> Callable<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 282</span><span class="ansi-red-fg">         </span>self<span class="ansi-blue-fg">.</span>training_type_plugin<span class="ansi-blue-fg">.</span>optimizer_step<span class="ansi-blue-fg">(</span>optimizer<span class="ansi-blue-fg">,</span> lambda_closure<span class="ansi-blue-fg">=</span>lambda_closure<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    283</span> 
+<span class="ansi-green-intense-fg ansi-bold">    284</span>     <span class="ansi-green-fg">def</span> optimizer_zero_grad<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> current_epoch<span class="ansi-blue-fg">:</span> int<span class="ansi-blue-fg">,</span> batch_idx<span class="ansi-blue-fg">:</span> int<span class="ansi-blue-fg">,</span> optimizer<span class="ansi-blue-fg">:</span> Optimizer<span class="ansi-blue-fg">,</span> opt_idx<span class="ansi-blue-fg">:</span> int<span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">-&gt;</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/pytorch_lightning/plugins/training_type/training_type_plugin.py</span> in <span class="ansi-cyan-fg">optimizer_step</span><span class="ansi-blue-fg">(self, optimizer, lambda_closure, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">    161</span> 
+<span class="ansi-green-intense-fg ansi-bold">    162</span>     <span class="ansi-green-fg">def</span> optimizer_step<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> optimizer<span class="ansi-blue-fg">:</span> torch<span class="ansi-blue-fg">.</span>optim<span class="ansi-blue-fg">.</span>Optimizer<span class="ansi-blue-fg">,</span> lambda_closure<span class="ansi-blue-fg">:</span> Callable<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 163</span><span class="ansi-red-fg">         </span>optimizer<span class="ansi-blue-fg">.</span>step<span class="ansi-blue-fg">(</span>closure<span class="ansi-blue-fg">=</span>lambda_closure<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/torch/optim/lr_scheduler.py</span> in <span class="ansi-cyan-fg">wrapper</span><span class="ansi-blue-fg">(*args, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">     63</span>                 instance<span class="ansi-blue-fg">.</span>_step_count <span class="ansi-blue-fg">+=</span> <span class="ansi-cyan-fg">1</span>
+<span class="ansi-green-intense-fg ansi-bold">     64</span>                 wrapped <span class="ansi-blue-fg">=</span> func<span class="ansi-blue-fg">.</span>__get__<span class="ansi-blue-fg">(</span>instance<span class="ansi-blue-fg">,</span> cls<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">---&gt; 65</span><span class="ansi-red-fg">                 </span><span class="ansi-green-fg">return</span> wrapped<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     66</span> 
+<span class="ansi-green-intense-fg ansi-bold">     67</span>             <span class="ansi-red-fg"># Note that the returned function here is no longer a bound method,</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/torch/optim/optimizer.py</span> in <span class="ansi-cyan-fg">wrapper</span><span class="ansi-blue-fg">(*args, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">     87</span>                 profile_name <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">&#34;Optimizer.step#{}.step&#34;</span><span class="ansi-blue-fg">.</span>format<span class="ansi-blue-fg">(</span>obj<span class="ansi-blue-fg">.</span>__class__<span class="ansi-blue-fg">.</span>__name__<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     88</span>                 <span class="ansi-green-fg">with</span> torch<span class="ansi-blue-fg">.</span>autograd<span class="ansi-blue-fg">.</span>profiler<span class="ansi-blue-fg">.</span>record_function<span class="ansi-blue-fg">(</span>profile_name<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">---&gt; 89</span><span class="ansi-red-fg">                     </span><span class="ansi-green-fg">return</span> func<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     90</span>             <span class="ansi-green-fg">return</span> wrapper
+<span class="ansi-green-intense-fg ansi-bold">     91</span> 
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/torch/autograd/grad_mode.py</span> in <span class="ansi-cyan-fg">decorate_context</span><span class="ansi-blue-fg">(*args, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">     25</span>         <span class="ansi-green-fg">def</span> decorate_context<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">     26</span>             <span class="ansi-green-fg">with</span> self<span class="ansi-blue-fg">.</span>__class__<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">---&gt; 27</span><span class="ansi-red-fg">                 </span><span class="ansi-green-fg">return</span> func<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     28</span>         <span class="ansi-green-fg">return</span> cast<span class="ansi-blue-fg">(</span>F<span class="ansi-blue-fg">,</span> decorate_context<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     29</span> 
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/torch/optim/adamw.py</span> in <span class="ansi-cyan-fg">step</span><span class="ansi-blue-fg">(self, closure)</span>
+<span class="ansi-green-intense-fg ansi-bold">     63</span>         <span class="ansi-green-fg">if</span> closure <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">not</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">     64</span>             <span class="ansi-green-fg">with</span> torch<span class="ansi-blue-fg">.</span>enable_grad<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">---&gt; 65</span><span class="ansi-red-fg">                 </span>loss <span class="ansi-blue-fg">=</span> closure<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     66</span> 
+<span class="ansi-green-intense-fg ansi-bold">     67</span>         <span class="ansi-green-fg">for</span> group <span class="ansi-green-fg">in</span> self<span class="ansi-blue-fg">.</span>param_groups<span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/pytorch_lightning/trainer/training_loop.py</span> in <span class="ansi-cyan-fg">train_step_and_backward_closure</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-intense-fg ansi-bold">    647</span> 
+<span class="ansi-green-intense-fg ansi-bold">    648</span>                         <span class="ansi-green-fg">def</span> train_step_and_backward_closure<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 649</span><span class="ansi-red-fg">                             result = self.training_step_and_backward(
+</span><span class="ansi-green-intense-fg ansi-bold">    650</span>                                 split_batch<span class="ansi-blue-fg">,</span> batch_idx<span class="ansi-blue-fg">,</span> opt_idx<span class="ansi-blue-fg">,</span> optimizer<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>trainer<span class="ansi-blue-fg">.</span>hiddens
+<span class="ansi-green-intense-fg ansi-bold">    651</span>                             )
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/pytorch_lightning/trainer/training_loop.py</span> in <span class="ansi-cyan-fg">training_step_and_backward</span><span class="ansi-blue-fg">(self, split_batch, batch_idx, opt_idx, optimizer, hiddens)</span>
+<span class="ansi-green-intense-fg ansi-bold">    741</span>         <span class="ansi-green-fg">with</span> self<span class="ansi-blue-fg">.</span>trainer<span class="ansi-blue-fg">.</span>profiler<span class="ansi-blue-fg">.</span>profile<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;training_step_and_backward&#34;</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    742</span>             <span class="ansi-red-fg"># lightning module hook</span>
+<span class="ansi-green-fg">--&gt; 743</span><span class="ansi-red-fg">             </span>result <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>training_step<span class="ansi-blue-fg">(</span>split_batch<span class="ansi-blue-fg">,</span> batch_idx<span class="ansi-blue-fg">,</span> opt_idx<span class="ansi-blue-fg">,</span> hiddens<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    744</span>             self<span class="ansi-blue-fg">.</span>_curr_step_result <span class="ansi-blue-fg">=</span> result
+<span class="ansi-green-intense-fg ansi-bold">    745</span> 
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/pytorch_lightning/trainer/training_loop.py</span> in <span class="ansi-cyan-fg">training_step</span><span class="ansi-blue-fg">(self, split_batch, batch_idx, opt_idx, hiddens)</span>
+<span class="ansi-green-intense-fg ansi-bold">    291</span>             model_ref<span class="ansi-blue-fg">.</span>_results <span class="ansi-blue-fg">=</span> Result<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    292</span>             <span class="ansi-green-fg">with</span> self<span class="ansi-blue-fg">.</span>trainer<span class="ansi-blue-fg">.</span>profiler<span class="ansi-blue-fg">.</span>profile<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;training_step&#34;</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 293</span><span class="ansi-red-fg">                 </span>training_step_output <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>trainer<span class="ansi-blue-fg">.</span>accelerator<span class="ansi-blue-fg">.</span>training_step<span class="ansi-blue-fg">(</span>args<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    294</span>                 self<span class="ansi-blue-fg">.</span>trainer<span class="ansi-blue-fg">.</span>accelerator<span class="ansi-blue-fg">.</span>post_training_step<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    295</span> 
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/pytorch_lightning/accelerators/accelerator.py</span> in <span class="ansi-cyan-fg">training_step</span><span class="ansi-blue-fg">(self, args)</span>
+<span class="ansi-green-intense-fg ansi-bold">    154</span> 
+<span class="ansi-green-intense-fg ansi-bold">    155</span>         <span class="ansi-green-fg">with</span> self<span class="ansi-blue-fg">.</span>precision_plugin<span class="ansi-blue-fg">.</span>train_step_context<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>training_type_plugin<span class="ansi-blue-fg">.</span>train_step_context<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 156</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>training_type_plugin<span class="ansi-blue-fg">.</span>training_step<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    157</span> 
+<span class="ansi-green-intense-fg ansi-bold">    158</span>     <span class="ansi-green-fg">def</span> post_training_step<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/pytorch_lightning/plugins/training_type/training_type_plugin.py</span> in <span class="ansi-cyan-fg">training_step</span><span class="ansi-blue-fg">(self, *args, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">    123</span> 
+<span class="ansi-green-intense-fg ansi-bold">    124</span>     <span class="ansi-green-fg">def</span> training_step<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 125</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>lightning_module<span class="ansi-blue-fg">.</span>training_step<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    126</span> 
+<span class="ansi-green-intense-fg ansi-bold">    127</span>     <span class="ansi-green-fg">def</span> post_training_step<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">/notebooks/dlnotebooks/mllib/nlp/seq2seq.py</span> in <span class="ansi-cyan-fg">training_step</span><span class="ansi-blue-fg">(self, batch, batch_idx)</span>
+<span class="ansi-green-intense-fg ansi-bold">    224</span>         trg_seq <span class="ansi-blue-fg">=</span> trg_seq<span class="ansi-blue-fg">.</span>transpose<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    225</span> 
+<span class="ansi-green-fg">--&gt; 226</span><span class="ansi-red-fg">         </span>output <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>forward<span class="ansi-blue-fg">(</span>src_seq<span class="ansi-blue-fg">,</span> src_lengths<span class="ansi-blue-fg">,</span> trg_seq<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    227</span> 
+<span class="ansi-green-intense-fg ansi-bold">    228</span>         <span class="ansi-red-fg"># do not know if this is a problem, loss will be computed with sos token</span>
+
+<span class="ansi-green-fg">/notebooks/dlnotebooks/mllib/nlp/seq2seq.py</span> in <span class="ansi-cyan-fg">forward</span><span class="ansi-blue-fg">(self, source, source_len, target, teacher_force_ratio)</span>
+<span class="ansi-green-intense-fg ansi-bold">    182</span> 
+<span class="ansi-green-intense-fg ansi-bold">    183</span>         <span class="ansi-green-fg">for</span> t <span class="ansi-green-fg">in</span> range<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">,</span> target_len<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 184</span><span class="ansi-red-fg">             </span>output<span class="ansi-blue-fg">,</span> hidden<span class="ansi-blue-fg">,</span> cell <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>decoder<span class="ansi-blue-fg">(</span>x<span class="ansi-blue-fg">,</span> hidden<span class="ansi-blue-fg">,</span> cell<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    185</span> 
+<span class="ansi-green-intense-fg ansi-bold">    186</span>             outputs<span class="ansi-blue-fg">[</span>t<span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> output
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/bdb.py</span> in <span class="ansi-cyan-fg">trace_dispatch</span><span class="ansi-blue-fg">(self, frame, event, arg)</span>
+<span class="ansi-green-intense-fg ansi-bold">     92</span>             <span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>dispatch_return<span class="ansi-blue-fg">(</span>frame<span class="ansi-blue-fg">,</span> arg<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     93</span>         <span class="ansi-green-fg">if</span> event <span class="ansi-blue-fg">==</span> <span class="ansi-blue-fg">&#39;exception&#39;</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">---&gt; 94</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>dispatch_exception<span class="ansi-blue-fg">(</span>frame<span class="ansi-blue-fg">,</span> arg<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     95</span>         <span class="ansi-green-fg">if</span> event <span class="ansi-blue-fg">==</span> <span class="ansi-blue-fg">&#39;c_call&#39;</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">     96</span>             <span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>trace_dispatch
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/bdb.py</span> in <span class="ansi-cyan-fg">dispatch_exception</span><span class="ansi-blue-fg">(self, frame, arg)</span>
+<span class="ansi-green-intense-fg ansi-bold">    172</span>                     and arg[0] is StopIteration and arg[2] is None):
+<span class="ansi-green-intense-fg ansi-bold">    173</span>                 self<span class="ansi-blue-fg">.</span>user_exception<span class="ansi-blue-fg">(</span>frame<span class="ansi-blue-fg">,</span> arg<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">--&gt; 174</span><span class="ansi-red-fg">                 </span><span class="ansi-green-fg">if</span> self<span class="ansi-blue-fg">.</span>quitting<span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">raise</span> BdbQuit
+<span class="ansi-green-intense-fg ansi-bold">    175</span>         <span class="ansi-red-fg"># Stop at the StopIteration or GeneratorExit exception when the user</span>
+<span class="ansi-green-intense-fg ansi-bold">    176</span>         <span class="ansi-red-fg"># has set stopframe in a generator by issuing a return command, or a</span>
+
+<span class="ansi-red-fg">BdbQuit</span>: </pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>nvidia-smi
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Fri Jan 21 23:27:59 2022       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 460.91.03    Driver Version: 460.91.03    CUDA Version: 11.2     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                               |                      |               MIG M. |
+|===============================+======================+======================|
+|   0  Quadro RTX 4000     Off  | 00000000:00:05.0 Off |                  N/A |
+| 30%   46C    P0    29W / 125W |   1044MiB /  7982MiB |      0%      Default |
+|                               |                      |                  N/A |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                                  |
+|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+|        ID   ID                                                   Usage      |
+|=============================================================================|
++-----------------------------------------------------------------------------+
 </pre>
 </div>
 </div>
