@@ -6,6 +6,7 @@ __all__ = ['Encoder', 'Decoder', 'Seq2Seq']
 from torch import nn
 from torch import optim
 import torch
+import torch.nn.functional as F
 
 from torch.nn.utils.rnn import pack_padded_sequence, pad_packed_sequence
 
@@ -18,7 +19,7 @@ class Encoder(nn.Module):
 
         self.dropout = nn.Dropout(p)
         self.embedding = nn.Embedding(input_size, embedding_size)
-        self.rnn = nn.LSTM(embedding_size, hidden_size, num_layers, dropout=p)
+        self.rnn = nn.LSTM(embedding_size, hidden_size, num_layers, dropout=p,batch_first=False)
 
     def forward(self, x, x_len):
         # x shape (seq_length, N)
@@ -44,7 +45,7 @@ class Decoder(nn.Module):
 
         self.dropout = nn.Dropout(dropout)
         self.embedding = nn.Embedding(input_size, embedding_size)
-        self.rnn = nn.LSTM(embedding_size, hidden_size, num_layers, dropout=dropout)
+        self.rnn = nn.LSTM(embedding_size, hidden_size, num_layers, dropout=dropout,batch_first=False)
 
         self.fc = nn.Linear(hidden_size, output_size)
 
@@ -55,7 +56,8 @@ class Decoder(nn.Module):
         embedding = self.dropout(self.embedding(x))
         # embedding shape (1, N , embedding_size)
 
-        output = self.rnn(embedding, (hidden,cell))
+        embedding = F.relu(embedding)
+        output,_ = self.rnn(embedding, (hidden,cell))
 
         predictions = self.fc(output)
         # shape of predictions : (1, N, length_of_vocab)
@@ -69,6 +71,7 @@ class Decoder(nn.Module):
 
 
 # Cell
+import random
 
 import pytorch_lightning as pl
 import pytorch_lightning.metrics.functional as plfunc
@@ -178,18 +181,21 @@ class Seq2Seq(pl.LightningModule):
         # mask = [batch_size, src len]
         # without sos token at the beginning and eos token at the end
 
-        x = target[0,:]
+        #x = target[0,:]
+        decoder_input = torch.ones(batch_size).long().to(self.device)
+        decoder_hidden = (hidden, cell)
 
         for t in range(1, target_len):
-            output, hidden, cell = self.decoder(x, hidden, cell)
+            decoder_output, *decoder_hidden = self.decoder(decoder_input, decoder_hidden[0], decoder_hidden[1])
 
-            outputs[t] = output
+            outputs[t] = decoder_output
 
             #(N, english_vocab_size)
-            best_guess = output.argmax(1)
+            #best_guess = output.argmax(1)
+            topv, topi = decoder_output.topk(1)
+            decoder_input = topi.squeeze().detach()
 
-            x = target[t] if random.random() < teacher_force_ratio else best_guess
-
+            decoder_input = target[t] if random.random() < teacher_force_ratio else decoder_input
 
         return outputs
 
@@ -217,8 +223,6 @@ class Seq2Seq(pl.LightningModule):
         return [optimizer],[lr_scheduler]
 
     def training_step(self, batch, batch_idx):
-        import pdb
-        pdb.set_trace()
         src_seq, trg_seq, src_lengths = batch['src'],batch['trg'], batch['src_len']
         src_seq = src_seq.transpose(0, 1)
         trg_seq = trg_seq.transpose(0, 1)
