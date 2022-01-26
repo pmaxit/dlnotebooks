@@ -15,6 +15,9 @@ entries:
     - output: web,pdf
       title: Encoder - Decoder Architecture
       url: seq2seq.html
+    - output: web,pdf
+      title: Title
+      url: tensorboard.html
     output: web
     title: mllib
   output: web

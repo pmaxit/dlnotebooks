@@ -5,7 +5,7 @@ __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 index = {"URL": "00_dataset.ipynb",
          "CMUDict": "00_dataset.ipynb",
          "Encoder": "01_seq2seq.ipynb",
-         "Decoder": "01_seq2seq.ipynb",
+         "NewDecoder": "01_seq2seq.ipynb",
          "Seq2Seq": "01_seq2seq.ipynb"}
 
 modules = ["nlp/datasets/cmudict.py",

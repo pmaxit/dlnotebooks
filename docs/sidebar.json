@@ -2,6 +2,7 @@
   "mllib": {
     "Overview": "/",
     "NLP deep learning": "dataset.html",
-    "Encoder - Decoder Architecture": "seq2seq.html"
+    "Encoder - Decoder Architecture": "seq2seq.html",
+    "Title": "tensorboard.html"
   }
 }

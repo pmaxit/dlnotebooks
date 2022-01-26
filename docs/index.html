@@ -103,9 +103,8 @@ nb_path: "nbs/index.ipynb"
 
 <div class="output_area">
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Downloading and preparing dataset cmu_dict/cmu3 to /root/.cache/huggingface/datasets/cmu_dict/cmu3/1.0.0/a0e598136ef9603a0d6d97059f5e1d2cac789cfe3c0998cb2b4b7fd4198da504...
-Dataset cmu_dict downloaded and prepared to /root/.cache/huggingface/datasets/cmu_dict/cmu3/1.0.0/a0e598136ef9603a0d6d97059f5e1d2cac789cfe3c0998cb2b4b7fd4198da504. Subsequent calls will reuse this data.
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Reusing dataset cmu_dict (/root/.cache/huggingface/datasets/cmu_dict/cmu3/1.0.0/a0e598136ef9603a0d6d97059f5e1d2cac789cfe3c0998cb2b4b7fd4198da504)
 </pre>
 </div>
 </div>
@@ -127,6 +126,20 @@ Dataset cmu_dict downloaded and prepared to /root/.cache/huggingface/datasets/cm
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Loading cached split indices for dataset at /root/.cache/huggingface/datasets/cmu_dict/cmu3/1.0.0/a0e598136ef9603a0d6d97059f5e1d2cac789cfe3c0998cb2b4b7fd4198da504/cache-b2d95f15faaf4500.arrow and /root/.cache/huggingface/datasets/cmu_dict/cmu3/1.0.0/a0e598136ef9603a0d6d97059f5e1d2cac789cfe3c0998cb2b4b7fd4198da504/cache-5ed2c4bc219f1934.arrow
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -188,128 +201,6 @@ Dataset cmu_dict downloaded and prepared to /root/.cache/huggingface/datasets/cm
 </pre></div>
 
     </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train_test</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">][</span><span class="s1">&#39;word&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">train_test</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">][</span><span class="s1">&#39;phoneme&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> 
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>(&#39;preempted&#39;, [&#39;P&#39;, &#39;R&#39;, &#39;IY0&#39;, &#39;EH1&#39;, &#39;M&#39;, &#39;P&#39;, &#39;T&#39;, &#39;IH0&#39;, &#39;D&#39;])</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span>build_vocab_from_iterator<span class="o">??</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea ">
-<pre><span class="ansi-red-fg">Signature:</span>
-build_vocab_from_iterator<span class="ansi-blue-fg">(</span>
-    iterator<span class="ansi-blue-fg">:</span> Iterable<span class="ansi-blue-fg">,</span>
-    min_freq<span class="ansi-blue-fg">:</span> int <span class="ansi-blue-fg">=</span> <span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">,</span>
-    specials<span class="ansi-blue-fg">:</span> Union<span class="ansi-blue-fg">[</span>List<span class="ansi-blue-fg">[</span>str<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span> NoneType<span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span>
-    special_first<span class="ansi-blue-fg">:</span> bool <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">True</span><span class="ansi-blue-fg">,</span>
-<span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">-&gt;</span> torchtext<span class="ansi-blue-fg">.</span>vocab<span class="ansi-blue-fg">.</span>vocab<span class="ansi-blue-fg">.</span>Vocab
-<span class="ansi-red-fg">Source:</span>   
-<span class="ansi-green-fg">def</span> build_vocab_from_iterator<span class="ansi-blue-fg">(</span>iterator<span class="ansi-blue-fg">:</span> Iterable<span class="ansi-blue-fg">,</span> min_freq<span class="ansi-blue-fg">:</span> int <span class="ansi-blue-fg">=</span> <span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">,</span> specials<span class="ansi-blue-fg">:</span> Optional<span class="ansi-blue-fg">[</span>List<span class="ansi-blue-fg">[</span>str<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span> special_first<span class="ansi-blue-fg">:</span> bool <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">True</span><span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">-&gt;</span> Vocab<span class="ansi-blue-fg">:</span>
-    <span class="ansi-blue-fg">&#34;&#34;&#34;</span>
-<span class="ansi-blue-fg">    Build a Vocab from an iterator.</span>
-
-<span class="ansi-blue-fg">    Args:</span>
-<span class="ansi-blue-fg">        iterator: Iterator used to build Vocab. Must yield list or iterator of tokens.</span>
-<span class="ansi-blue-fg">        min_freq: The minimum frequency needed to include a token in the vocabulary.</span>
-<span class="ansi-blue-fg">        specials: Special symbols to add. The order of supplied tokens will be preserved.</span>
-<span class="ansi-blue-fg">        special_first: Indicates whether to insert symbols at the beginning or at the end.</span>
-
-
-<span class="ansi-blue-fg">    Returns:</span>
-<span class="ansi-blue-fg">        torchtext.vocab.Vocab: A `Vocab` object</span>
-
-<span class="ansi-blue-fg">    Examples:</span>
-<span class="ansi-blue-fg">        &gt;&gt;&gt; #generating vocab from text file</span>
-<span class="ansi-blue-fg">        &gt;&gt;&gt; import io</span>
-<span class="ansi-blue-fg">        &gt;&gt;&gt; from torchtext.vocab import build_vocab_from_iterator</span>
-<span class="ansi-blue-fg">        &gt;&gt;&gt; def yield_tokens(file_path):</span>
-<span class="ansi-blue-fg">        &gt;&gt;&gt;     with io.open(file_path, encoding = &#39;utf-8&#39;) as f:</span>
-<span class="ansi-blue-fg">        &gt;&gt;&gt;         for line in f:</span>
-<span class="ansi-blue-fg">        &gt;&gt;&gt;             yield line.strip().split()</span>
-<span class="ansi-blue-fg">        &gt;&gt;&gt; vocab = build_vocab_from_iterator(yield_tokens_batch(file_path), specials=[&#34;&lt;unk&gt;&#34;])</span>
-<span class="ansi-blue-fg">    &#34;&#34;&#34;</span>
-
-    counter <span class="ansi-blue-fg">=</span> Counter<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-    <span class="ansi-green-fg">for</span> tokens <span class="ansi-green-fg">in</span> iterator<span class="ansi-blue-fg">:</span>
-        counter<span class="ansi-blue-fg">.</span>update<span class="ansi-blue-fg">(</span>tokens<span class="ansi-blue-fg">)</span>
-
-    <span class="ansi-green-fg">if</span> specials <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">not</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
-        <span class="ansi-green-fg">for</span> tok <span class="ansi-green-fg">in</span> specials<span class="ansi-blue-fg">:</span>
-            <span class="ansi-green-fg">del</span> counter<span class="ansi-blue-fg">[</span>tok<span class="ansi-blue-fg">]</span>
-
-    sorted_by_freq_tuples <span class="ansi-blue-fg">=</span> sorted<span class="ansi-blue-fg">(</span>counter<span class="ansi-blue-fg">.</span>items<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span> key<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">lambda</span> x<span class="ansi-blue-fg">:</span> x<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span>
-    sorted_by_freq_tuples<span class="ansi-blue-fg">.</span>sort<span class="ansi-blue-fg">(</span>key<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">lambda</span> x<span class="ansi-blue-fg">:</span> x<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span> reverse<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span><span class="ansi-blue-fg">)</span>
-    ordered_dict <span class="ansi-blue-fg">=</span> OrderedDict<span class="ansi-blue-fg">(</span>sorted_by_freq_tuples<span class="ansi-blue-fg">)</span>
-
-    <span class="ansi-green-fg">if</span> specials <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">not</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
-        <span class="ansi-green-fg">if</span> special_first<span class="ansi-blue-fg">:</span>
-            specials <span class="ansi-blue-fg">=</span> specials<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">:</span><span class="ansi-blue-fg">:</span><span class="ansi-blue-fg">-</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">]</span>
-        <span class="ansi-green-fg">for</span> symbol <span class="ansi-green-fg">in</span> specials<span class="ansi-blue-fg">:</span>
-            ordered_dict<span class="ansi-blue-fg">.</span>update<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">{</span>symbol<span class="ansi-blue-fg">:</span> min_freq<span class="ansi-blue-fg">}</span><span class="ansi-blue-fg">)</span>
-            ordered_dict<span class="ansi-blue-fg">.</span>move_to_end<span class="ansi-blue-fg">(</span>symbol<span class="ansi-blue-fg">,</span> last<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">not</span> special_first<span class="ansi-blue-fg">)</span>
-
-    word_vocab <span class="ansi-blue-fg">=</span> vocab<span class="ansi-blue-fg">(</span>ordered_dict<span class="ansi-blue-fg">,</span> min_freq<span class="ansi-blue-fg">=</span>min_freq<span class="ansi-blue-fg">)</span>
-    <span class="ansi-green-fg">return</span> word_vocab
-<span class="ansi-red-fg">File:</span>      /opt/conda/lib/python3.8/site-packages/torchtext/vocab/vocab_factory.py
-<span class="ansi-red-fg">Type:</span>      function
-</pre>
-</div>
-
-</div>
-
 </div>
 </div>
 
@@ -420,7 +311,7 @@ build_vocab_from_iterator<span class="ansi-blue-fg">(</span>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Data-Collator">Data Collator<a class="anchor-link" href="#Data-Collator"> </a></h1>
+<h1 id="Data-pipelines">Data pipelines<a class="anchor-link" href="#Data-pipelines"> </a></h1>
 </div>
 </div>
 </div>
@@ -448,28 +339,10 @@ build_vocab_from_iterator<span class="ansi-blue-fg">(</span>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-
-<span class="k">def</span> <span class="nf">process_single_example</span><span class="p">(</span><span class="n">word_tokens</span><span class="p">,</span> <span class="n">phoneme</span><span class="p">,</span> <span class="n">word_length</span><span class="p">):</span>
-    <span class="c1"># Heree you can add variety of operations, Not only is it tokenize</span>
-    <span class="c1"># The object that this function handles, Namely dataset this data type, adopt featuer</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">src_pipeline</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">data</span><span class="p">:</span> <span class="n">word_vocab</span><span class="o">.</span><span class="n">lookup_indices</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+<span class="n">trg_pipeline</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">data</span><span class="p">:</span> <span class="n">phoneme_vocab</span><span class="o">.</span><span class="n">lookup_indices</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
     
-    <span class="n">src</span> <span class="o">=</span> <span class="n">word_vocab</span><span class="o">.</span><span class="n">lookup_indices</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">word_tokens</span><span class="p">))</span>
-    <span class="n">trg</span> <span class="o">=</span> <span class="n">phoneme_vocab</span><span class="o">.</span><span class="n">lookup_indices</span><span class="p">(</span><span class="n">phoneme</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">src</span><span class="p">,</span> <span class="n">trg</span><span class="p">,</span> <span class="n">word_length</span>
-
-<span class="k">def</span> <span class="nf">collate_batch</span><span class="p">(</span><span class="n">batch</span><span class="p">):</span>
     
-    <span class="n">batch_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">batch</span><span class="p">[</span><span class="s1">&#39;word&#39;</span><span class="p">])</span>
-    <span class="n">out</span> <span class="o">=</span> <span class="p">[</span><span class="n">process_single_example</span><span class="p">(</span><span class="o">*</span><span class="n">tokens</span><span class="p">)</span> <span class="k">for</span> <span class="n">tokens</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">batch</span><span class="p">[</span><span class="s1">&#39;word&#39;</span><span class="p">],</span> <span class="n">batch</span><span class="p">[</span><span class="s1">&#39;phoneme&#39;</span><span class="p">],</span> <span class="n">batch</span><span class="p">[</span><span class="s1">&#39;word_length&#39;</span><span class="p">])]</span>
-    
-
-    <span class="k">return</span> <span class="p">{</span>
-        <span class="s1">&#39;src&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">out</span><span class="p">],</span>
-        <span class="s1">&#39;trg&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">out</span><span class="p">],</span>
-        <span class="s1">&#39;src_len&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">b</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">out</span><span class="p">],</span>
-    <span class="p">}</span>
 </pre></div>
 
     </div>
@@ -479,6 +352,12 @@ build_vocab_from_iterator<span class="ansi-blue-fg">(</span>
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Prepare-for-manual-inputs">Prepare for manual inputs<a class="anchor-link" href="#Prepare-for-manual-inputs"> </a></h3>
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -486,47 +365,19 @@ build_vocab_from_iterator<span class="ansi-blue-fg">(</span>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ds_processed</span> <span class="o">=</span> <span class="n">train_test</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">collate_batch</span><span class="p">,</span> <span class="n">remove_columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;word&#39;</span><span class="p">,</span><span class="s1">&#39;word_length&#39;</span><span class="p">,</span><span class="s1">&#39;phoneme&#39;</span><span class="p">],</span> 
-                        <span class="n">batch_size</span><span class="o">=</span> <span class="n">BATCH_SIZE</span><span class="p">,</span>
-                           <span class="n">batched</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">with_format</span><span class="p">(</span><span class="s1">&#39;pytorch&#39;</span><span class="p">,</span> <span class="n">output_all_columns</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">datasets</span> <span class="kn">import</span> <span class="n">Dataset</span>
+
+<span class="c1"># from python dictionary</span>
+<span class="n">my_dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;word&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;puneet&#39;</span><span class="p">,</span><span class="s1">&#39;mike&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;word_length&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span>
+    <span class="s1">&#39;phoneme&#39;</span><span class="p">:</span> <span class="p">[[</span><span class="s1">&#39;P&#39;</span><span class="p">,</span><span class="s1">&#39;N&#39;</span><span class="p">,</span><span class="s1">&#39;T&#39;</span><span class="p">],[</span><span class="s1">&#39;M&#39;</span><span class="p">,</span><span class="s1">&#39;K&#39;</span><span class="p">]]</span>
+<span class="p">}</span>
+
+<span class="n">dummy_dataset</span><span class="o">=</span> <span class="n">Dataset</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">my_dict</span><span class="p">)</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ds_processed</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>{&#39;src&#39;: tensor([17,  7,  8,  8,  4,  6, 15]),
- &#39;trg&#39;: tensor([15, 19,  6, 10, 25]),
- &#39;src_len&#39;: tensor(7)}</pre>
-</div>
-
-</div>
-
 </div>
 </div>
 
@@ -541,35 +392,20 @@ build_vocab_from_iterator<span class="ansi-blue-fg">(</span>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
+<span class="k">def</span> <span class="nf">pad_collate</span><span class="p">(</span><span class="n">batch</span><span class="p">):</span>
+    <span class="n">items</span><span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="n">src_pipeline</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="s1">&#39;word&#39;</span><span class="p">]),</span> 
+             <span class="n">trg_pipeline</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="s1">&#39;phoneme&#39;</span><span class="p">]),</span> 
+              <span class="n">items</span><span class="p">[</span><span class="s1">&#39;word_length&#39;</span><span class="p">])</span> <span class="k">for</span> <span class="n">items</span> <span class="ow">in</span> <span class="n">batch</span>
+           <span class="p">]</span>
     
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">pad_collate</span><span class="p">(</span><span class="n">batch</span><span class="p">):</span>
-    
-    <span class="k">def</span> <span class="nf">pad</span><span class="p">(</span><span class="n">xs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">pad</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ind</span><span class="p">):</span>
+        <span class="n">xs</span> <span class="o">=</span> <span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">ind</span><span class="p">])</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xs</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">rnn</span><span class="o">.</span><span class="n">pad_sequence</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">batch_first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    
-    <span class="n">src</span> <span class="o">=</span> <span class="p">[</span><span class="n">b</span><span class="p">[</span><span class="s1">&#39;src&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">batch</span><span class="p">]</span>
-    <span class="n">trg</span> <span class="o">=</span> <span class="p">[</span><span class="n">b</span><span class="p">[</span><span class="s1">&#39;trg&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">batch</span><span class="p">]</span>
-    <span class="n">src_len</span> <span class="o">=</span> <span class="p">[</span><span class="n">b</span><span class="p">[</span><span class="s1">&#39;src_len&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">batch</span><span class="p">]</span>
-    
+
     <span class="k">return</span> <span class="p">{</span>
-        <span class="s1">&#39;src&#39;</span><span class="p">:</span> <span class="n">pad</span><span class="p">(</span><span class="n">src</span><span class="p">),</span> 
-        <span class="s1">&#39;trg&#39;</span> <span class="p">:</span> <span class="n">pad</span><span class="p">(</span><span class="n">trg</span><span class="p">),</span> 
-        <span class="s1">&#39;src_len&#39;</span> <span class="p">:</span> <span class="n">src_len</span>
+        <span class="s1">&#39;src&#39;</span><span class="p">:</span> <span class="n">pad</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+        <span class="s1">&#39;trg&#39;</span> <span class="p">:</span> <span class="n">pad</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+        <span class="s1">&#39;src_len&#39;</span> <span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">items</span><span class="p">])</span>
     <span class="p">}</span>
 </pre></div>
 
@@ -587,24 +423,7 @@ build_vocab_from_iterator<span class="ansi-blue-fg">(</span>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dls</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">ds_processed</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">],</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">collate_fn</span><span class="o">=</span><span class="n">pad_collate</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dls</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">train_test</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">],</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">collate_fn</span><span class="o">=</span><span class="n">pad_collate</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -631,6 +450,12 @@ build_vocab_from_iterator<span class="ansi-blue-fg">(</span>
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Testing">Testing<a class="anchor-link" href="#Testing"> </a></h3>
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -646,13 +471,26 @@ build_vocab_from_iterator<span class="ansi-blue-fg">(</span>
 <span class="k">def</span> <span class="nf">decode_phoneme</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
     <span class="k">return</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">phoneme_vocab</span><span class="o">.</span><span class="n">lookup_tokens</span><span class="p">(</span><span class="n">lst</span><span class="o">.</span><span class="n">numpy</span><span class="p">()))</span>
 
-<span class="n">indices</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">1000</span><span class="p">),</span> <span class="mi">5</span> <span class="p">)</span>
+<span class="n">decoder_funs</span><span class="o">=</span><span class="p">{</span>
+    <span class="s1">&#39;src&#39;</span><span class="p">:</span> <span class="n">decode_word</span><span class="p">,</span>
+    <span class="s1">&#39;trg&#39;</span><span class="p">:</span> <span class="n">decode_phoneme</span>
+<span class="p">}</span>
 
-<span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">:</span>
-    <span class="n">src</span> <span class="o">=</span> <span class="n">decode_word</span><span class="p">(</span><span class="n">ds_processed</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">][</span><span class="s1">&#39;src&#39;</span><span class="p">][</span><span class="n">l</span><span class="p">])</span>
-    <span class="n">trg</span> <span class="o">=</span> <span class="n">decode_phoneme</span><span class="p">(</span><span class="n">ds_processed</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">][</span><span class="s1">&#39;trg&#39;</span><span class="p">][</span><span class="n">l</span><span class="p">])</span>
-    <span class="n">src_len</span> <span class="o">=</span> <span class="n">ds_processed</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">][</span><span class="s1">&#39;src_len&#39;</span><span class="p">][</span><span class="n">l</span><span class="p">]</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">trg</span><span class="p">,</span> <span class="n">src_len</span><span class="p">)</span>
+<span class="n">batch</span><span class="o">=</span><span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">dls</span><span class="p">))</span>
+
+
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">batch</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;---&#39;</span><span class="o">*</span><span class="mi">24</span><span class="p">)</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">decoder_funs</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">decoder_funs</span><span class="p">[</span><span class="n">k</span><span class="p">](</span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            
+        <span class="n">count</span> <span class="o">-=</span> <span class="mi">1</span>
 </pre></div>
 
     </div>
@@ -665,11 +503,24 @@ build_vocab_from_iterator<span class="ansi-blue-fg">(</span>
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>benigno B,EH2,N,IY1,N,Y,OW0 tensor(7)
-canilles K,AH0,N,IH1,L,IY0,Z tensor(8)
-hals HH,AE1,L,Z tensor(4)
-pennella P,EH2,N,EH1,L,AH0 tensor(8)
-kardos K,AA1,R,D,OW0,Z tensor(6)
+<pre>------------------------------------------------------------------------
+src irell&lt;unk&gt;&lt;unk&gt;&lt;unk&gt;&lt;unk&gt;&lt;unk&gt;&lt;unk&gt;&lt;unk&gt;&lt;unk&gt;&lt;unk&gt;&lt;unk&gt;
+src catanzaro&lt;unk&gt;&lt;unk&gt;&lt;unk&gt;&lt;unk&gt;&lt;unk&gt;&lt;unk&gt;
+src nayden&lt;unk&gt;&lt;unk&gt;&lt;unk&gt;&lt;unk&gt;&lt;unk&gt;&lt;unk&gt;&lt;unk&gt;&lt;unk&gt;&lt;unk&gt;
+src lucie&lt;unk&gt;&lt;unk&gt;&lt;unk&gt;&lt;unk&gt;&lt;unk&gt;&lt;unk&gt;&lt;unk&gt;&lt;unk&gt;&lt;unk&gt;&lt;unk&gt;
+src moore&lt;unk&gt;&lt;unk&gt;&lt;unk&gt;&lt;unk&gt;&lt;unk&gt;&lt;unk&gt;&lt;unk&gt;&lt;unk&gt;&lt;unk&gt;&lt;unk&gt;
+------------------------------------------------------------------------
+trg AY0,R,EH1,L,&lt;unk&gt;,&lt;unk&gt;,&lt;unk&gt;,&lt;unk&gt;,&lt;unk&gt;,&lt;unk&gt;,&lt;unk&gt;,&lt;unk&gt;,&lt;unk&gt;,&lt;unk&gt;
+trg K,AA0,T,AA0,N,Z,AA1,R,OW0,&lt;unk&gt;,&lt;unk&gt;,&lt;unk&gt;,&lt;unk&gt;,&lt;unk&gt;
+trg N,EY1,D,IH0,N,&lt;unk&gt;,&lt;unk&gt;,&lt;unk&gt;,&lt;unk&gt;,&lt;unk&gt;,&lt;unk&gt;,&lt;unk&gt;,&lt;unk&gt;,&lt;unk&gt;
+trg L,UW1,S,IY0,&lt;unk&gt;,&lt;unk&gt;,&lt;unk&gt;,&lt;unk&gt;,&lt;unk&gt;,&lt;unk&gt;,&lt;unk&gt;,&lt;unk&gt;,&lt;unk&gt;,&lt;unk&gt;
+trg M,UH1,R,&lt;unk&gt;,&lt;unk&gt;,&lt;unk&gt;,&lt;unk&gt;,&lt;unk&gt;,&lt;unk&gt;,&lt;unk&gt;,&lt;unk&gt;,&lt;unk&gt;,&lt;unk&gt;,&lt;unk&gt;
+------------------------------------------------------------------------
+src_len tensor(5)
+src_len tensor(9)
+src_len tensor(6)
+src_len tensor(5)
+src_len tensor(5)
 </pre>
 </div>
 </div>
@@ -694,43 +545,19 @@ kardos K,AA1,R,D,OW0,Z tensor(6)
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pytorch_lightning</span> <span class="k">as</span> <span class="nn">pl</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pytorch_lightning.callbacks</span> <span class="kn">import</span> <span class="n">LearningRateMonitor</span>
+<span class="kn">from</span> <span class="nn">pytorch_lightning.callbacks</span> <span class="kn">import</span> <span class="n">LearningRateMonitor</span>
 <span class="kn">from</span> <span class="nn">pytorch_lightning.loggers</span> <span class="kn">import</span> <span class="n">TensorBoardLogger</span>
-</pre></div>
 
-    </div>
-</div>
-</div>
+<span class="kn">from</span> <span class="nn">pytorch_lightning</span> <span class="kn">import</span> <span class="n">Trainer</span>
+<span class="kn">from</span> <span class="nn">pytorch_lightning.loggers</span> <span class="kn">import</span> <span class="n">NeptuneLogger</span>
 
-</div>
-    {% endraw %}
+<span class="c1"># create NeptuneLogger</span>
+<span class="n">neptune_logger</span> <span class="o">=</span> <span class="n">NeptuneLogger</span><span class="p">(</span>
+    <span class="n">api_key</span> <span class="o">=</span> <span class="s2">&quot;eyJhcGlfYWRkcmVzcyI6Imh0dHBzOi8vYXBwLm5lcHR1bmUuYWkiLCJhcGlfdXJsIjoiaHR0cHM6Ly9hcHAubmVwdHVuZS5haSIsImFwaV9rZXkiOiIwYWY0OTQ4MS03MGY4LTRhNjUtOTFlZC0zZjVjMjlmZGQxNjQifQ==&quot;</span><span class="p">,</span>
 
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">lr_monitor</span> <span class="o">=</span> <span class="n">LearningRateMonitor</span><span class="p">(</span><span class="n">logging_interval</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">)</span>
-<span class="n">logger</span> <span class="o">=</span> <span class="n">TensorBoardLogger</span><span class="p">(</span><span class="s1">&#39;tb_logs&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;my_model&#39;</span><span class="p">)</span>
-<span class="n">trainer</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">Trainer</span><span class="p">(</span><span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">lr_monitor</span><span class="p">],</span><span class="n">max_epochs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">gpus</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">logger</span><span class="o">=</span><span class="p">[</span><span class="n">logger</span><span class="p">])</span>
+    <span class="n">project_name</span><span class="o">=</span><span class="s1">&#39;puneetgirdhar.in/seq2seq&#39;</span><span class="p">,</span>  <span class="c1"># &quot;&lt;WORKSPACE/PROJECT&gt;&quot;</span>
+    <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;seq2seq&quot;</span><span class="p">],</span>  <span class="c1"># optional</span>
+<span class="p">)</span>
 </pre></div>
 
     </div>
@@ -743,8 +570,7 @@ kardos K,AA1,R,D,OW0,Z tensor(6)
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>GPU available: True, used: True
-TPU available: None, using: 0 TPU cores
+<pre>NeptuneLogger will work in online mode
 </pre>
 </div>
 </div>
@@ -762,10 +588,7 @@ TPU available: None, using: 0 TPU cores
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">input_vocab_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">word_vocab</span><span class="p">)</span>
-<span class="n">output_vocab_size</span>  <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">phoneme_vocab</span><span class="p">)</span>
-
-<span class="n">model</span> <span class="o">=</span> <span class="n">Seq2Seq</span><span class="p">(</span><span class="n">input_vocab_size</span><span class="p">,</span> <span class="n">output_vocab_size</span><span class="p">,</span><span class="n">p</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">MAX_EPOCHS</span><span class="o">=</span><span class="mi">5</span>
 </pre></div>
 
     </div>
@@ -782,10 +605,122 @@ TPU available: None, using: 0 TPU cores
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">batch</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">dls</span><span class="p">))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pytorch_lightning.callbacks</span> <span class="kn">import</span> <span class="n">Callback</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#     with torch.no_grad():</span>
+<span class="c1">#         input_tensor = tensorFromSentence(sentence)</span>
+<span class="c1">#         input_length = input_tensor.size()[0]</span>
+        
+<span class="c1">#         decoder_input = torch.ones().to(device)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">EvaluationCallback</span><span class="p">(</span><span class="n">Callback</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_samples</span><span class="p">:</span><span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">max_length</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">pad_idx</span><span class="p">:</span><span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_samples</span> <span class="o">=</span> <span class="n">num_samples</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">pad_idx</span> <span class="o">=</span> <span class="n">pad_idx</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">examples</span>  <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;word&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;puneet&#39;</span><span class="p">,</span><span class="s1">&#39;mike&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;word_length&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span>
+        <span class="s1">&#39;phoneme&#39;</span><span class="p">:</span> <span class="p">[[</span><span class="s1">&#39;P&#39;</span><span class="p">,</span><span class="s1">&#39;N&#39;</span><span class="p">,</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="s1">&#39;P&#39;</span><span class="p">,</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="s1">&#39;S&#39;</span><span class="p">],[</span><span class="s1">&#39;M&#39;</span><span class="p">,</span><span class="s1">&#39;K&#39;</span><span class="p">]]</span>
+        <span class="p">}</span>
+        
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_length</span> <span class="o">=</span> <span class="n">max_length</span>
+    
+    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">trainer</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">stage</span><span class="p">):</span>
+        <span class="n">dummy_dataset</span><span class="o">=</span> <span class="n">Dataset</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">examples</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">dls</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">dummy_dataset</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">collate_fn</span> <span class="o">=</span> <span class="n">pad_collate</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">batch</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dls</span><span class="p">))</span>
+        
+    <span class="k">def</span> <span class="nf">on_epoch_end</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">trainer</span><span class="p">,</span><span class="n">pl_module</span><span class="p">)</span><span class="o">-&gt;</span><span class="kc">None</span><span class="p">:</span>
+
+        <span class="n">input_seq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch</span><span class="p">[</span><span class="s1">&#39;src&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
+        <span class="n">target_seq</span> <span class="o">=</span>  <span class="bp">self</span><span class="o">.</span><span class="n">batch</span><span class="p">[</span><span class="s1">&#39;trg&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
+        <span class="n">src_len</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch</span><span class="p">[</span><span class="s1">&#39;src_len&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">pl_module</span><span class="p">(</span><span class="n">input_seq</span><span class="p">,</span> <span class="n">src_len</span><span class="p">,</span> <span class="n">target_seq</span><span class="p">)</span>
+        
+        <span class="n">output</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">permute</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># batch x seq_len x output_dim</span>
+        
+        <span class="n">topv</span><span class="p">,</span> <span class="n">topi</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">topk</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># topi will be seq_lenx batch x output_dim</span>
+        
+        <span class="n">topi</span><span class="o">=</span> <span class="n">topi</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">topi</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">decode_phoneme</span><span class="p">(</span><span class="n">topi</span><span class="p">[</span><span class="n">b</span><span class="p">]</span><span class="o">.</span><span class="n">cpu</span><span class="p">())</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">lr_monitor</span> <span class="o">=</span> <span class="n">LearningRateMonitor</span><span class="p">(</span><span class="n">logging_interval</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">)</span>
+<span class="n">ec</span> <span class="o">=</span> <span class="n">EvaluationCallback</span><span class="p">()</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">TensorBoardLogger</span><span class="p">(</span><span class="s1">&#39;tb_logs&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;my_model&#39;</span><span class="p">)</span>
+<span class="n">trainer</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">Trainer</span><span class="p">(</span><span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">lr_monitor</span><span class="p">,</span> <span class="n">ec</span><span class="p">],</span><span class="n">max_epochs</span><span class="o">=</span><span class="n">MAX_EPOCHS</span><span class="p">,</span> <span class="n">gpus</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">logger</span><span class="o">=</span><span class="p">[</span><span class="n">neptune_logger</span><span class="p">])</span>
+
+<span class="n">find_trainer</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">Trainer</span><span class="p">(</span><span class="n">auto_lr_find</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>GPU available: True, used: True
+TPU available: None, using: 0 TPU cores
+GPU available: True, used: False
+TPU available: None, using: 0 TPU cores
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -811,32 +746,231 @@ TPU available: None, using: 0 TPU cores
 
 <div class="output_area">
 
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>
-  | Name    | Type             | Params
----------------------------------------------
-0 | _loss   | CrossEntropyLoss | 0     
-1 | encoder | Encoder          | 14.0 K
-2 | decoder | Decoder          | 17.3 K
----------------------------------------------
-31.3 K    Trainable params
-0         Non-trainable params
-31.3 K    Total params
-0.125     Total estimated model params size (MB)
-/opt/conda/lib/python3.8/site-packages/pytorch_lightning/utilities/distributed.py:51: UserWarning: Detected KeyboardInterrupt, attempting graceful shutdown...
-  warnings.warn(*args, **kwargs)
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>https://app.neptune.ai/puneetgirdhar.in/seq2seq/e/SEQ-4
 </pre>
 </div>
 </div>
 
 <div class="output_area">
 
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>1</pre>
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>
+  | Name    | Type             | Params
+---------------------------------------------
+0 | _loss   | CrossEntropyLoss | 0     
+1 | encoder | Encoder          | 14.0 K
+2 | decoder | NewDecoder       | 17.3 K
+---------------------------------------------
+31.3 K    Trainable params
+0         Non-trainable params
+31.3 K    Total params
+0.125     Total estimated model params size (MB)
+/opt/conda/lib/python3.8/site-packages/pytorch_lightning/utilities/distributed.py:51: UserWarning: The dataloader, train dataloader, does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` (try 8 which is the number of cpus on this machine) in the `DataLoader` init to improve performance.
+  warnings.warn(*args, **kwargs)
+</pre>
+</div>
 </div>
 
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">input_vocab_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">word_vocab</span><span class="p">)</span>
+<span class="n">output_vocab_size</span>  <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">phoneme_vocab</span><span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">Seq2Seq</span><span class="p">(</span><span class="n">input_vocab_size</span><span class="p">,</span> <span class="n">output_vocab_size</span><span class="p">,</span><span class="n">p</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span><span class="n">max_epochs</span><span class="o">=</span><span class="n">MAX_EPOCHS</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">lr_finder</span> <span class="o">=</span> <span class="n">find_trainer</span><span class="o">.</span><span class="n">tuner</span><span class="o">.</span><span class="n">lr_find</span><span class="p">(</span> <span class="n">model</span><span class="p">,</span> <span class="n">train_dataloader</span><span class="o">=</span><span class="n">dls</span> <span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/opt/conda/lib/python3.8/site-packages/pytorch_lightning/utilities/distributed.py:51: UserWarning: you defined a validation_step but have no val_dataloader. Skipping validation loop
+  warnings.warn(*args, **kwargs)
+
+  | Name    | Type             | Params
+---------------------------------------------
+0 | _loss   | CrossEntropyLoss | 0     
+1 | encoder | Encoder          | 14.0 K
+2 | decoder | NewDecoder       | 17.3 K
+---------------------------------------------
+31.3 K    Trainable params
+0         Non-trainable params
+31.3 K    Total params
+0.125     Total estimated model params size (MB)
+/opt/conda/lib/python3.8/site-packages/pytorch_lightning/utilities/distributed.py:51: UserWarning: The dataloader, train dataloader, does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` (try 8 which is the number of cpus on this machine) in the `DataLoader` init to improve performance.
+  warnings.warn(*args, **kwargs)
+Restored states from the checkpoint file at /notebooks/dlnotebooks/nbs/lr_find_temp_model.ckpt
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Plot with</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">lr_finder</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">suggest</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">new_lr</span> <span class="o">=</span> <span class="n">lr_finder</span><span class="o">.</span><span class="n">suggestion</span><span class="p">()</span>
+
+<span class="c1"># update hparams of the model</span>
+<span class="n">model</span><span class="o">.</span><span class="n">hparams</span><span class="o">.</span><span class="n">lr</span> <span class="o">=</span> <span class="n">new_lr</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Prediction">Prediction<a class="anchor-link" href="#Prediction"> </a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Here we will test the model to check if it has been trained well or not.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">Seq2Seq</span><span class="o">.</span><span class="n">load_from_checkpoint</span><span class="p">(</span><span class="s1">&#39;model.ckpt&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">learning_rate</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0.0005
+</pre>
+</div>
 </div>
 
 </div>
